@@ -38,7 +38,13 @@ public class Level {
 		return map.toString();
 	}
 	 
-	//verifie si une case est vide
+	
+	/**
+	 * Check if a case is empty or not
+	 * @param i
+	 * @param j
+	 * @return true if the case is empty
+	 */
 	public boolean caseIsEmpty(int i,int j){
 		return grid[i][j] == null;
 	}
