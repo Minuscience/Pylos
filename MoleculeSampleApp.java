@@ -10,7 +10,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
+<<<<<<< HEAD
 import javafx.scene.shape.Rectangle;
+=======
+>>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
@@ -28,7 +31,11 @@ public class MoleculeSampleApp extends Application {
 	final Xform cameraXform = new Xform();
 	final Xform cameraXform2 = new Xform();
 	final Xform cameraXform3 = new Xform();
+<<<<<<< HEAD
 	final double cameraDistance = 850;
+=======
+	final double cameraDistance = 450;
+>>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
     private Timeline timeline;
     boolean timelinePlaying = false;
     double ONE_FRAME = 1.0/24.0;
@@ -44,7 +51,11 @@ public class MoleculeSampleApp extends Application {
     double mouseDeltaX;
     double mouseDeltaY;
     
+<<<<<<< HEAD
     private static final double HYDROGEN_ANGLE = 80.0;
+=======
+    private static final double HYDROGEN_ANGLE = 104.5;
+>>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 
 	private void buildAxes() {
 		System.out.println("buildAxes()");
@@ -105,6 +116,7 @@ public class MoleculeSampleApp extends Application {
 	       greyMaterial.setDiffuseColor(Color.DARKGREY);
 	       greyMaterial.setSpecularColor(Color.GREY);
 	 
+<<<<<<< HEAD
 //	       Xform moleculeXform = new Xform();
 //	       Xform oxygenXform = new Xform();
 //	       Xform hydrogen1SideXform = new Xform();
@@ -162,6 +174,44 @@ public class MoleculeSampleApp extends Application {
 	      moleculeGroup.getChildren().add(sphereXform);
 	      moleculeGroup.getChildren().add(sphere2Xform);
 	      moleculeGroup.getChildren().add(sphere3Xform);
+=======
+	      
+	 
+	       Xform moleculeXform = new Xform();
+	       Xform oxygenXform = new Xform();
+	       Xform hydrogen1SideXform = new Xform();
+	       Xform hydrogen1Xform = new Xform();
+	       Xform hydrogen2SideXform = new Xform();
+	       Xform hydrogen2Xform = new Xform();
+
+	      Sphere oxygenSphere = new Sphere(40.0);
+	      oxygenSphere.setMaterial(redMaterial);
+
+	      Sphere hydrogen1Sphere = new Sphere(30.0);
+	      hydrogen1Sphere.setMaterial(whiteMaterial);
+	      hydrogen1Sphere.setTranslateX(0.0);
+
+	      Sphere hydrogen2Sphere = new Sphere(30.0);
+	      hydrogen2Sphere.setMaterial(whiteMaterial);
+	      hydrogen2Sphere.setTranslateZ(0.0);
+
+	
+
+	      moleculeXform.getChildren().add(oxygenXform);
+	      moleculeXform.getChildren().add(hydrogen1SideXform);
+	      moleculeXform.getChildren().add(hydrogen2SideXform);
+	      oxygenXform.getChildren().add(oxygenSphere);
+	      hydrogen1SideXform.getChildren().add(hydrogen1Xform);
+	      hydrogen2SideXform.getChildren().add(hydrogen2Xform);
+	      hydrogen1Xform.getChildren().add(hydrogen1Sphere);
+	      hydrogen2Xform.getChildren().add(hydrogen2Sphere);
+	 
+	      hydrogen1Xform.setTx(100.0);
+	      hydrogen2Xform.setTx(100.0);
+	      hydrogen2SideXform.setRotateY(HYDROGEN_ANGLE);
+
+	      moleculeGroup.getChildren().add(moleculeXform);
+>>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 
 	      world.getChildren().addAll(moleculeGroup);
 	}
@@ -213,6 +263,11 @@ public class MoleculeSampleApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		System.out.println("start");
+<<<<<<< HEAD
+=======
+	 
+		Sphere mySphere = new Sphere(50);
+>>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 
 		buildScene();
 		buildBoard();
@@ -221,12 +276,21 @@ public class MoleculeSampleApp extends Application {
 	
 		Scene scene = new Scene(root, 1024, 768, true);
 		scene.setFill(Color.GREY);
+<<<<<<< HEAD
         handleMouse(scene, world);
+=======
+		  ;
+	        handleMouse(scene, world);
+>>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 	
 		primaryStage.setTitle("Molecule Sample Application");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		scene.setCamera(camera);
+<<<<<<< HEAD
+=======
+	
+>>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 	}
 
 	/**

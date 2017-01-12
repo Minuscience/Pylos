@@ -70,7 +70,10 @@ public class Board {
 		return false;
 	}
 
+<<<<<<< HEAD
 	
+=======
+>>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 	/**
 	 * Put the ball in parameter on the board
 	 * 
@@ -88,4 +91,59 @@ public class Board {
 		return false;
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Check if a ball has another on top of it
+	 * 
+	 * @param lv
+	 * @param x
+	 * @param y
+	 * @return true if there is a ball
+	 */
+	public boolean hasABallOnTop(int lv, int x, int y) {
+		if (lv == 0)
+			return false;
+		else if (lv == 1)
+			return onTop();
+		else {
+			if (x == 0) {
+				if (y != lv)
+					return !isEmpty(lv - 1, 0, y);
+				else if (y == lv)
+					return !isEmpty(lv - 1, 0, y - 1);
+			}
+			if (x == lv) {
+				if (y != 0)
+					return !isEmpty(lv - 1, x - 1, y);
+				else if (y == lv)
+					return !isEmpty(lv - 1, x - 1, y - 1);
+			}
+
+			if (y == lv) {
+				if (x != lv)
+					return !isEmpty(lv - 1, x, y - 1);
+			}
+			if (y == 0) {
+				if (x != lv)
+					return !isEmpty(lv - 1, x, 0);
+				else if (y == lv)
+					return !isEmpty(lv - 1, x - 1, 0);
+			}
+			return !isEmpty(lv - 1, x - 1, y - 1) && !isEmpty(lv - 1, x - 1, y) && !isEmpty(lv - 1, x, y - 1)
+					&& !isEmpty(lv - 1, x, y);
+
+		}
+
+	}
+
+	public boolean removeBall(int lv, int x, int y) {
+		if (hasABallOnTop(lv, x, y))
+			return false;
+		else {
+			getBall(lv, x, y).setOnBoard(false);
+			return true;
+		}
+	}
+>>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 }
