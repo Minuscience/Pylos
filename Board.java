@@ -131,6 +131,51 @@ public class Board {
 
 	}
 
+	public boolean square(int lv, int x, int y) {
+		if (lv == 0)
+			return false;
+		else {
+			if (isEmpty(lv, x, y) || isEmpty(lv, x + 1, y) || isEmpty(lv, x, y + 1) || isEmpty(lv, x + 1, y + 1))
+				return false;
+			else {
+				boolean color = getBall(lv, x, y).isBlack();
+				return (color == getBall(lv, x + 1, y).isBlack() && color == getBall(lv, x, y + 1).isBlack()
+						&& color == getBall(lv, x + 1, y + 1).isBlack());
+			}
+		}
+
+	}
+
+	public boolean squareFull(int lv, int x, int y) {
+		if (lv == 0)
+			return false;
+		else if (lv == 1)
+			return square(lv, 0, 0);
+		else {
+			if (x == 0) {
+				if (y == lv)
+					return square(lv, 0, y - 1);
+				else if (y > 0)
+					return square(lv, 0, y - 1) && square(lv, 0, y);
+				else
+					return square(lv, x, y);
+			} else if (x == lv) {
+				if (y == lv)
+					return square(lv, x - 1, y - 1);
+				else if (y > 0)
+					return square(lv, 0, y - 1) && square(lv, 0, y);
+				else
+					return square(lv, x - 1, y);
+			} else if (y == 0) {
+				return square(lv, x - 1, y) && square(lv, x, y);
+			} else if (y == lv) {
+				return square(lv, x - 1, y - 1) && square(lv, x, y - 1);
+			} else {
+				return square(lv, x - 1, y - 1) && square(lv, x - 1, y) && square(lv, x, y - 1) && square(lv, x, y);
+			}
+		}
+	}
+
 	public boolean removeBall(int lv, int x, int y) {
 		if (hasABallOnTop(lv, x, y))
 			return false;
