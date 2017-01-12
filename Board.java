@@ -46,6 +46,42 @@ public class Board {
 	}
 
 	/**
+	 * Check if a ball has another on top of it
+	 * @param lv
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public boolean hasABallOnTop(int lv, int x, int y){
+		if(lv==0)
+			return false;
+		else if(lv=1)
+			return onTop();
+		else{
+			if (x==0){
+				if(y != lv)
+				return !isEmpty(lv-1, 0, y);
+			else if(y == lv)
+				return !isEmpty(lv-1, 0, y-1);
+			}
+			if (y==0){
+				if(x != lv)
+				return !isEmpty(lv-1, x, 0);
+			else if(y == lv)
+				return !isEmpty(lv-1, x-1, 0);
+			}
+			if (x==lv){
+				if(y != 0)
+				return !isEmpty(lv-1, x-1, y);
+			else if(y == )
+				return !isEmpty(lv-1, 0, y-1);
+			}
+		}
+		
+		
+	}
+
+	/**
 	 * Check if a case is playable: -check if the case is free -check if on the
 	 * lower level there are balls to support the choosen case (if you choose an
 	 * upper level)
@@ -70,7 +106,6 @@ public class Board {
 		return false;
 	}
 
-	
 	/**
 	 * Put the ball in parameter on the board
 	 * 
