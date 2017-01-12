@@ -29,6 +29,14 @@ public class Player {
 		this.turn = turn;
 	}
 
+	public ArrayList<Ball> getMyBall() {
+		return myBall;
+	}
+
+	public void setMyBall(ArrayList<Ball> myBall) {
+		this.myBall = myBall;
+	}
+
 	// un joueur peut jouer si c'est son tour et qu'il a des boules
 	/**
 	 * Check if it's the player turn and if he had free ball in his pool
