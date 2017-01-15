@@ -82,6 +82,7 @@ public class Board {
 	public boolean setBall(Ball ball, int lv, int x, int y) {
 		if (playableCase(lv, x, y)) {
 			board[lv].setBall(ball, x, y);
+			ball.setOnBoard(true);
 			return true;
 		}
 		return false;
@@ -176,8 +177,8 @@ public class Board {
 		}
 	}
 
-	public boolean removeBall(int lv, int x, int y) {
-		if (hasABallOnTop(lv, x, y))
+	public boolean removeBall(Player player,int lv, int x, int y) {
+		if (hasABallOnTop(lv, x, y)||player.isBlack()!= getBall(lv, x, y).isBlack())
 			return false;
 		else {
 			getBall(lv, x, y).setOnBoard(false);
