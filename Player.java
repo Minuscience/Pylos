@@ -29,20 +29,7 @@ public class Player {
 		this.turn = turn;
 	}
 
-	public ArrayList<Ball> getMyBall() {
-		return myBall;
-	}
-
-	public void setMyBall(ArrayList<Ball> myBall) {
-		this.myBall = myBall;
-	}
-
-	// un joueur peut jouer si c'est son tour et qu'il a des boules
-	/**
-	 * Check if it's the player turn and if he had free ball in his pool
-	 * 
-	 * @return
-	 */
+	//un joueur peut jouer si c'est son tour et qu'il a des boules
 	public boolean canPlay() {
 		if (!turn)
 			return false;
@@ -53,11 +40,6 @@ public class Player {
 		return false;
 	}
 
-	/**
-	 * check if the player have a ball free in is pool
-	 * 
-	 * @return the first playable ball in the player pooll
-	 */
 	public Ball playableBall() {
 		for (Ball ball : myBall) {
 			if (!ball.isOnBoard())
@@ -66,24 +48,11 @@ public class Player {
 		return null;
 	}
 
-	/**
-	 * This function checck if the player can play then if the case in witch he
-	 * wants to place the ball is free; if so it puts the ball on the case and
-	 * return true
-	 * 
-	 * @param board
-	 *            the board on wich the player play
-	 * @param lv
-	 *            the level of the ball
-	 * @param x
-	 * @param y
-	 * @return true if the ball is placed else false
-	 */
-	public boolean placeBallOn(Board board, int lv, int x, int y) {
-		if (!canPlay() && !board.playableCase(lv, x, y))
+	public boolean placeBallOn(Board b, int lv, int x, int y) {
+		if (!canPlay() && !b.playableCase(lv, x, y))
 			return false;
 		Ball current = playableBall();
-		board.setBall(current, lv, x, y);
+		b.setBall(current, lv, x, y);
 		current.getPlace().setPosition(lv, x, y);
 		current.setOnBoard(true);
 		return true;
