@@ -1,8 +1,13 @@
+import java.util.Optional;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -15,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class GameGUI extends Application {
 	public static void main(String[] args) {
@@ -51,7 +57,7 @@ public class GameGUI extends Application {
 		newGameLabel.setPrefWidth(300);
 		newGameLabel.setWrapText(true);
 		
-		newGame.setNewGame(newGameLabel, primaryStage);
+		newGame.setNewGame(newGameLabel);
 		
 		Menu newGameMenu = new Menu();
 		newGameMenu.setGraphic(newGameLabel);
@@ -75,7 +81,7 @@ public class GameGUI extends Application {
                 VBox dialogVbox = new VBox(20);
                 dialogVbox.getChildren().addAll(Rules.getRules());
                 dialogVbox.setSpacing(2.0);
-                Scene dialogScene = new Scene(dialogVbox, 1000, 600);
+                Scene dialogScene = new Scene(dialogVbox, 1000, 630);
                 popupRules.setScene(dialogScene);
                 popupRules.show();
             }
@@ -111,6 +117,29 @@ public class GameGUI extends Application {
 		
 		HBox menuBox = new HBox();
 		menuBox.getChildren().addAll(menuBar);
+		
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent event) {
+
+		        // changer le comportement du bouton
+		        event.consume();
+
+		        //les boutons
+		        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+		        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
+		        
+		        // show close dialog
+		        Alert alert = new Alert(null, "Are you sure?", yes, no);
+		        alert.setTitle("='(");
+		        alert.initOwner(primaryStage);
+
+		        Optional<ButtonType> result = alert.showAndWait();
+		        if (result.get() == yes){
+		            Platform.exit();
+		        }
+		    }
+		});
 		
 		return menuBox;
 	}
