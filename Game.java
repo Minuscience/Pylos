@@ -27,14 +27,16 @@ public class Game {
 				lv = scan.nextInt();
 				x = scan.nextInt();
 				y = scan.nextInt();
-				if (!gammers[j].placeBallOn(board, lv, x - 1, y - 1))
+				if (!gammers[j].placeBallOn(board, lv, x, y))
 					j--;
 				else if (board.squareFull(lv, x, y)) {
 					System.out.println("vous puvez retiter 1 ou 2 balles");
 					System.out.println("vous voulez en retirez combien?");
 					int nbBallToRemove = scan.nextInt();
-					while (nbBallToRemove != 0 || nbBallToRemove != 1 || nbBallToRemove != 2)
+					while (nbBallToRemove != 0 && nbBallToRemove != 1 && nbBallToRemove != 2) {
 						System.out.println("nombre saisi incorrect veillez entrer 0 , 1 ou 2");
+						nbBallToRemove = scan.nextInt();
+					}
 					switch (nbBallToRemove) {
 					case 0:
 						System.out.println("vous ne retirez pas de balle");
@@ -45,7 +47,7 @@ public class Game {
 						x = scan.nextInt();
 						y = scan.nextInt();
 						while (!board.removeBall(gammers[j], lv, x, y)) {
-							System.out.println("vous ne puvez pas retirez cette balle");
+							System.out.println("vous ne pouvez pas retirer cette balle");
 							System.out.println("entrer les coordonées de la balle à retirer");
 							lv = scan.nextInt();
 							x = scan.nextInt();
@@ -58,7 +60,7 @@ public class Game {
 						x = scan.nextInt();
 						y = scan.nextInt();
 						while (!board.removeBall(gammers[j], lv, x, y)) {
-							System.out.println("vous ne puvez pas retirez cette balle");
+							System.out.println("vous ne pouvez pas retirer cette balle");
 							System.out.println("entrer les coordonées de la balle à retirer");
 							lv = scan.nextInt();
 							x = scan.nextInt();
@@ -69,18 +71,16 @@ public class Game {
 					}
 				}
 				System.out.println(board);
-				if(board.onTop()){
+				if (board.onTop()) {
 					if (board.getBall(0, 0, 0).isBlack()) {
 						System.out.println("le joueur 0 a gagner");
-					}else
+					} else
 						System.out.println("le joueur 1 a gagner");
-				break;
+					break;
 				}
-					System.out.println();
-				}
+				System.out.println();
 			}
-
 		}
-	}
 
+	}
 }
