@@ -28,6 +28,11 @@ public class newGame {
 	            
 	            Button yesButton = new Button("Yes");
 	            Button noButton = new Button("No");
+				noButton.setOnAction(new EventHandler<ActionEvent>() {
+	                @Override public void handle(ActionEvent e) {
+	                	popupNewGame.close();
+	                }
+	            });
 	            hboxChoice.getChildren().addAll(yesButton, noButton);
 	            hboxChoice.setAlignment(Pos.CENTER);
 	            hboxChoice.setSpacing(10.0);
