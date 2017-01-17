@@ -142,17 +142,18 @@ public class Board {
 			if (x == 0) {
 				if (y == lv)
 					return square(lv, 0, y - 1);
-				else if (y > 0)
-					return square(lv, 0, y - 1) || square(lv, 0, y);
-				else
+				else if (y == 0)
 					return square(lv, x, y);
+				else
+					return square(lv, 0, y - 1) || square(lv, 0, y);
 			} else if (x == lv) {
 				if (y == lv)
 					return square(lv, x - 1, y - 1);
-				else if (y > 0)
-					return square(lv, 0, y - 1) || square(lv, 0, y);
-				else
+				else if (y == 0)
 					return square(lv, x - 1, y);
+
+				else
+					return square(lv, 0, y - 1) || square(lv, 0, y);
 			} else if (y == 0) {
 				return square(lv, x - 1, y) || square(lv, x, y);
 			} else if (y == lv) {
