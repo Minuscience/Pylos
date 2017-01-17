@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Player {
-	private boolean isBlack;
+	private final boolean isBlack;
 	private ArrayList<Ball> myBall;
 	private boolean turn;
 
@@ -11,14 +11,15 @@ public class Player {
 			myBall.add(new Ball(color));
 		}
 		turn = color;
+		isBlack = color;
+	}
+	
+	public String toString(){
+		return myBall.toString();
 	}
 
 	public boolean isBlack() {
 		return isBlack;
-	}
-
-	public void setBlack(boolean isBlack) {
-		this.isBlack = isBlack;
 	}
 
 	public boolean isTurn() {

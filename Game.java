@@ -25,6 +25,8 @@ public class Game {
 		gammers[1].placeBallOn(board, 3, 2, 2);
 		gammers[1].placeBallOn(board, 3, 2, 3);
 		System.out.println(board);
+		System.out.println(j1);
+		System.out.println(j2);
 		for (int i = 0; i < 30; i += 2) {
 			for (int j = 0; j < gammers.length; j++) {
 				System.out.println("joueur" + j + " a vous de jouer");
@@ -43,6 +45,8 @@ public class Game {
 						nbBallToRemove = scan.nextInt();
 					}
 					System.out.println(board);
+					System.out.println(j1);
+					System.out.println(j2);
 					switch (nbBallToRemove) {
 					case 0:
 						System.out.println("vous ne retirez pas de balle");
@@ -62,6 +66,8 @@ public class Game {
 							} while (!board.removeBall(gammers[j], lv, x, y));
 						}
 						System.out.println(board);
+						System.out.println(j1);
+						System.out.println(j2);
 						;
 					case 1:
 						System.out.println("entrer les coordonées de la balle à retirer");
@@ -78,11 +84,15 @@ public class Game {
 							} while (!board.removeBall(gammers[j], lv, x, y));
 						}
 						System.out.println(board);
+						System.out.println(j1);
+						System.out.println(j2);
 						;
 
 					}
 				}
 				System.out.println(board);
+				System.out.println(j1);
+				System.out.println(j2);
 				if (board.onTop()) {
 					if (board.getBall(0, 0, 0).isBlack()) {
 						System.out.println("le joueur 0 a gagner");
