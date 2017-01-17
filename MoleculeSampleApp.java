@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
@@ -27,7 +28,7 @@ public class MoleculeSampleApp extends Application {
 	final Xform cameraXform = new Xform();
 	final Xform cameraXform2 = new Xform();
 	final Xform cameraXform3 = new Xform();
-	final double cameraDistance = 450;
+	final double cameraDistance = 850;
     private Timeline timeline;
     boolean timelinePlaying = false;
     double ONE_FRAME = 1.0/24.0;
@@ -43,7 +44,7 @@ public class MoleculeSampleApp extends Application {
     double mouseDeltaX;
     double mouseDeltaY;
     
-    private static final double HYDROGEN_ANGLE = 104.5;
+    private static final double HYDROGEN_ANGLE = 80.0;
 
 	private void buildAxes() {
 		System.out.println("buildAxes()");
@@ -104,6 +105,63 @@ public class MoleculeSampleApp extends Application {
 	       greyMaterial.setDiffuseColor(Color.DARKGREY);
 	       greyMaterial.setSpecularColor(Color.GREY);
 	 
+//	       Xform moleculeXform = new Xform();
+//	       Xform oxygenXform = new Xform();
+//	       Xform hydrogen1SideXform = new Xform();
+//	       Xform hydrogen1Xform = new Xform();
+//	       Xform hydrogen2SideXform = new Xform();
+//	       Xform hydrogen2Xform = new Xform();
+//
+	      Sphere sphere = new Sphere(30.0);
+	      sphere.setMaterial(whiteMaterial);
+	      
+	      Xform sphereXform = new Xform();
+	      sphereXform.getChildren().add(sphere);
+	      
+	      Sphere sphere2 = new Sphere(30.0);
+	      sphere2.setMaterial(greyMaterial);
+	      
+	      Xform sphere2Xform = new Xform();
+	      sphere2Xform.getChildren().add(sphere2);
+	      sphere2Xform.setTx(60);
+	      
+	      Sphere sphere3 = new Sphere(30.0);
+	      sphere.setMaterial(whiteMaterial);
+	      
+	      Xform sphere3Xform = new Xform();
+	      sphere3Xform.getChildren().add(sphere3);
+	      sphere3Xform.setTz(60);
+	      
+//	      Sphere hydrogen1Sphere = new Sphere(40.0);
+//	      hydrogen1Sphere.setMaterial(whiteMaterial);
+//
+//	      Sphere hydrogen2Sphere = new Sphere(40.0);
+//	      hydrogen2Sphere.setMaterial(whiteMaterial);
+//
+//	      moleculeXform.getChildren().add(oxygenXform);
+//	      moleculeXform.getChildren().add(hydrogen1SideXform);
+//	      moleculeXform.getChildren().add(hydrogen2SideXform);
+//	      oxygenXform.getChildren().add(oxygenSphere);
+//	      hydrogen1SideXform.getChildren().add(hydrogen1Xform);
+//	      hydrogen2SideXform.getChildren().add(hydrogen2Xform);
+//	      hydrogen1Xform.getChildren().add(hydrogen1Sphere);
+//	      hydrogen2Xform.getChildren().add(hydrogen2Sphere);
+//	 
+//	      hydrogen1Xform.setTx(80.0);
+//	      hydrogen2Xform.setTx(80.0);
+//	      hydrogen2SideXform.setTranslateZ(HYDROGEN_ANGLE);
+	       
+	       Box box = new Box(400, 10, 400);
+	       box.setMaterial(whiteMaterial);
+
+	       Xform boxXform = new Xform();
+	       boxXform.getChildren().add(box);
+	       boxXform.setTranslateY(-35);
+	       
+	      moleculeGroup.getChildren().add(boxXform);
+	      moleculeGroup.getChildren().add(sphereXform);
+	      moleculeGroup.getChildren().add(sphere2Xform);
+	      moleculeGroup.getChildren().add(sphere3Xform);
 	      
 	 
 	       Xform moleculeXform = new Xform();
@@ -191,7 +249,6 @@ public class MoleculeSampleApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		System.out.println("start");
-	 
 		Sphere mySphere = new Sphere(50);
 
 		buildScene();
@@ -201,14 +258,12 @@ public class MoleculeSampleApp extends Application {
 	
 		Scene scene = new Scene(root, 1024, 768, true);
 		scene.setFill(Color.GREY);
-		  ;
-	        handleMouse(scene, world);
+        handleMouse(scene, world);
 	
 		primaryStage.setTitle("Molecule Sample Application");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		scene.setCamera(camera);
-	
 	}
 
 	/**
