@@ -30,14 +30,14 @@ public class Game {
 		for (int i = 0; i < 30; i += 2) {
 			for (int j = 0; j < gammers.length; j++) {
 				System.out.println("joueur" + j + " a vous de jouer");
-				System.out.println("veuilllez entrer le niveau et les coordonées");
+				System.out.println("veuillez entrer le niveau et les coordonï¿½es");
 				lv = scan.nextInt();
 				x = scan.nextInt();
 				y = scan.nextInt();
 				if (gammers[j].playableBall() != null && !gammers[j].placeBallOn(board, lv, x, y))
 					j--;
 				else if (board.squareFull(lv, x, y)) {
-					System.out.println("vous pouvez retiter 1 ou 2 balles");
+					System.out.println("vous pouvez retirer 1 ou 2 balles");
 					System.out.println("vous voulez en retirer combien?");
 					int nbBallToRemove = scan.nextInt();
 					while (nbBallToRemove != 0 && nbBallToRemove != 1 && nbBallToRemove != 2) {
@@ -52,14 +52,14 @@ public class Game {
 						System.out.println("vous ne retirez pas de balle");
 						break;
 					case 2:
-						System.out.println("entrer les coordonées de la balle à retirer");
+						System.out.println("entrer les coordonnÃ©es de la balle Ã  retirer");
 						lv = scan.nextInt();
 						x = scan.nextInt();
 						y = scan.nextInt();
 						if (!board.removeBall(gammers[j], lv, x, y)) {
 							do {
 								System.out.println("vous ne pouvez pas retirer cette balle");
-								System.out.println("entrer les coordonées de la balle à retirer");
+								System.out.println("entrer les coordonnÃ©es de la balle Ã  retirer");
 								lv = scan.nextInt();
 								x = scan.nextInt();
 								y = scan.nextInt();
@@ -70,14 +70,14 @@ public class Game {
 						System.out.println(j2);
 						;
 					case 1:
-						System.out.println("entrer les coordonées de la balle à retirer");
+						System.out.println("entrer les coordonnÃ©es de la balle Ã  retirer");
 						lv = scan.nextInt();
 						x = scan.nextInt();
 						y = scan.nextInt();
 						if (!board.removeBall(gammers[j], lv, x, y)) {
 							do {
 								System.out.println("vous ne pouvez pas retirer cette balle");
-								System.out.println("entrer les coordonées de la balle à retirer");
+								System.out.println("entrer les coordonnÃ©es de la balle Ã  retirer");
 								lv = scan.nextInt();
 								x = scan.nextInt();
 								y = scan.nextInt();
