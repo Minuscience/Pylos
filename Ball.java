@@ -6,7 +6,12 @@ public class Ball {
 
 	public Ball(boolean isBlack) {
 		this.isBlack = isBlack;
-		onBoard = false;
+		this.onBoard = false;
+
+		place = new Position(-1,-1,-1);
+	}
+	public Ball() {
+		this.onBoard = false;
 
 		place = new Position(-1,-1,-1);
 	}
@@ -20,6 +25,8 @@ public class Ball {
 	}
 
 	public String toString() {
+		if(!onBoard)
+			return ".";
 		if (isBlack)
 			return "O";
 		else

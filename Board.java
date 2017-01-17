@@ -31,7 +31,10 @@ public class Board {
 
 	// verifie si une case est vide
 	public boolean isEmpty(int lv, int x, int y) {
-		return getBall(lv, x, y) == null;
+		if (getBall(lv, x, y) == null) {
+			return true;
+		} else
+			return !getBall(lv, x, y).isOnBoard();
 	}
 
 	// verifie si on peut jouer sur une case
@@ -67,7 +70,7 @@ public class Board {
 	 * @param lv
 	 * @param x
 	 * @param y
-	 * @return true if there is a ball
+	 * @return true if there is a ball on top
 	 */
 	public boolean hasABallOnTop(int lv, int x, int y) {
 		if (lv == 0)
@@ -76,45 +79,43 @@ public class Board {
 			return onTop();
 		else {
 			if (x == 0) {
-				if (y != lv)
-					return !isEmpty(lv - 1, 0, y);
-				else if (y == lv)
-					return !isEmpty(lv - 1, 0, y - 1);
-			}
-			if (x == lv) {
+				if (y == lv)
+					return !isEmpty(lv - 1, x, y - 1);
+				else if (y == 0)
+					return !isEmpty(lv - 1, 0, 0);
+				else
+					return !isEmpty(lv - 1, x, y) || !isEmpty(lv, x, y + 1);
+			} else if (x == lv) {
 				if (y == lv)
 					return !isEmpty(lv - 1, x - 1, y - 1);
-				else if (y != 0)
+				else if (y == 0)
 					return !isEmpty(lv - 1, x - 1, y);
+				else
+					return !isEmpty(lv - 1, x - 1, y) || !isEmpty(lv - 1, x - 1, y + 1);
+			} else if (y == 0) {
+				return !isEmpty(lv - 1, x, y) || !isEmpty(lv - 1, x + 1, y);
+			} else if (y == lv) {
+				return !isEmpty(lv - 1, x, y - 1) || !isEmpty(lv, x + 1, y - 1);
+			} else {
+				return (!isEmpty(lv - 1, x, y) || !isEmpty(lv - 1, x - 1, y) || !isEmpty(lv - 1, x, y - 1)
+						|| !isEmpty(lv - 1, x - 1, y - 1));
 
 			}
-
-			if (y == lv) {
-				if (x != lv)
-					return !isEmpty(lv - 1, x, y - 1);
-			}
-			if (y == 0) {
-				if (x != lv)
-					return !isEmpty(lv - 1, x, 0);
-				else if (y == lv)
-					return !isEmpty(lv - 1, x - 1, 0);
-			}
-			return !isEmpty(lv - 1, x - 1, y - 1) && !isEmpty(lv - 1, x - 1, y) && !isEmpty(lv - 1, x, y - 1)
-					&& !isEmpty(lv - 1, x, y);
-
 		}
-
 	}
 
 	public boolean removeBall(Player player, int lv, int x, int y) {
-		if (hasABallOnTop(lv, x, y))
+		System.out.println("player color = " + player.isBlack());
+		System.out.println("ball color = " + getBall(lv, x, y).isBlack());
+		if (hasABallOnTop(lv, x, y)) {
+			System.out.println("il y a une balle au dessus");
 			return false;
-		else if (player.isBlack() != getBall(lv, x, y).isBlack())
-			return false;
-		else {
+		} else if (player.isBlack() == getBall(lv, x, y).isBlack()) {
+			System.out.println("on retire");
 			getBall(lv, x, y).setOnBoard(false);
 			return true;
 		}
+		return false;
 	}
 
 	public boolean square(int lv, int x, int y) {
