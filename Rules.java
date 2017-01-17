@@ -53,7 +53,7 @@ public class Rules {
 		Text textRules2 = new Text();
 		textRules2.setText(
 				"Un joueur qui réalise un carré de billes à sa couleur, reprend tout de suite soit une, soit deux de ses billes\n"
-						+ "présentes sur le plateau pour les remettre dans sa réserve; il peut reprendre toute bille lui appartenant, é\n"
+						+ "présentes sur le plateau pour les remettre dans sa réserve; il peut reprendre toute bille lui appartenant, à\n"
 						+ "n'importe quel niveau - y compris celle qu'il vient de poser - mais à l'exclusion des billes supportant d'autres billes.\n"
 						+ "(Réaliser plusieurs carrés de billes à sa couleur en posant une bille n'autorise le retrait que d'une ou deux de ses billes)\n");
 
