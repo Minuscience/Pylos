@@ -7,61 +7,61 @@ import javafx.scene.text.Text;
 public class Rules {
 
 	public static Text getTitrePrincipal() {
-		Text titreRules = new Text("Déroulement d'une partie");
+		Text titreRules = new Text("DÃ©roulement d'une partie");
 		titreRules.setFont(Font.font("arial", FontWeight.BOLD, 22));
 		return titreRules;
 	}
 
 	public static Text getTitre() {
-		Text titre1 = new Text("Début de partie\n");
+		Text titre1 = new Text("DÃ©but de partie\n");
 		titre1.setFont(Font.font("arial", FontPosture.ITALIC, 18));
 		return titre1;
 	}
 
 	public static Text getTitre1() {
-		Text titre1 = new Text("Empilement sur un carré.\n");
+		Text titre1 = new Text("Empilement sur un carrÃ©.\n");
 		titre1.setFont(Font.font("arial", FontPosture.ITALIC, 18));
 		return titre1;
 	}
 
 	public static Text getTitre2() {
-		Text titre2 = new Text("Carré à sa couleur.\n");
+		Text titre2 = new Text("CarrÃ© Ã  sa couleur.\n");
 		titre2.setFont(Font.font("arial", FontPosture.ITALIC, 18));
 		return titre2;
 	}
 
 	public static Text getTitre3() {
-		Text titre3 = new Text("Empilement et carré\n");
+		Text titre3 = new Text("Empilement et carrÃ©\n");
 		titre3.setFont(Font.font("arial", FontPosture.ITALIC, 18));
 		return titre3;
 	}
 
 	public static VBox getRules() {
 		Text textRules = new Text();
-		textRules.setText("Chaque joueur à son tour place une bille de sa réserve sur une case de son choix.\n");
+		textRules.setText("Chaque joueur Ã  son tour place une bille de sa rÃ©serve sur une case de son choix.\n");
 
 		Text textRules1 = new Text();
 		textRules1.setText(
-				"Quand sur le plateau, ou aux niveaux supérieurs, un ou plusieurs carrés de billes sont formés, un joueur peut choisir d'y\n"
-						+ "empiler une de ses billes ;\n" + "à son tour de jeu, il a alors le choix entre :\n"
-						+ "	- placer une bille de sa réserve sur le plateau.\n"
-						+ "	- placer une bille de sa réserve sur un des carrés de billes.\n"
-						+ "	- déplacer une de ses billes déjà présentes sur le plateau pour la poser sur un carré de billes, uniquement si ce\n"
-						+ "	déplacement monte sa bille d'un ou plusieurs niveaux. Ce coup permet d'économiser une bille de sa réserve.\n"
-						+ "Une bille présente sur le plateau ne peut pas être déplacée si elle supporte déjà une autre bille.\n");
+				"Quand sur le plateau, ou aux niveaux supÃ©rieurs, un ou plusieurs carrÃ©s de billes sont formÃ©s, un joueur peut choisir d'y\n"
+						+ "empiler une de ses billes ;\n" + "Ã  son tour de jeu, il a alors le choix entre :\n"
+						+ "	- placer une bille de sa rÃ©serve sur le plateau.\n"
+						+ "	- placer une bille de sa rÃ©serve sur un des carrÃ©s de billes.\n"
+						+ "	- dÃ©placer une de ses billes dÃ©jÃ  prÃ©sentes sur le plateau pour la poser sur un carrÃ© de billes, uniquement si ce\n"
+						+ "	dÃ©placement monte sa bille d'un ou plusieurs niveaux. Ce coup permet d'Ã©conomiser une bille de sa rÃ©serve.\n"
+						+ "Une bille prÃ©sente sur le plateau ne peut pas Ãªtre dÃ©placÃ©e si elle supporte dÃ©jÃ  une autre bille.\n");
 
 		Text textRules2 = new Text();
 		textRules2.setText(
-				"Un joueur qui réalise un carré de billes à sa couleur, reprend tout de suite soit une, soit deux de ses billes\n"
-						+ "présentes sur le plateau pour les remettre dans sa réserve; il peut reprendre toute bille lui appartenant, é\n"
-						+ "n'importe quel niveau - y compris celle qu'il vient de poser - mais à l'exclusion des billes supportant d'autres billes.\n"
-						+ "(Réaliser plusieurs carrés de billes à sa couleur en posant une bille n'autorise le retrait que d'une ou deux de ses billes)\n");
+				"Un joueur qui rÃ©alise un carrÃ© de billes Ã  sa couleur, reprend tout de suite soit une, soit deux de ses billes\n"
+						+ "prÃ©sentes sur le plateau pour les remettre dans sa rÃ©serve; il peut reprendre toute bille lui appartenant, Ã©\n"
+						+ "n'importe quel niveau - y compris celle qu'il vient de poser - mais Ã  l'exclusion des billes supportant d'autres billes.\n"
+						+ "(RÃ©aliser plusieurs carrÃ©s de billes Ã  sa couleur en posant une bille n'autorise le retrait que d'une ou deux de ses billes)\n");
 
 		Text textRules3 = new Text();
-		textRules3.setText("Dans le méme coup, un joueur a la possibilité de :\n"
-				+ "- monter une de ses billes se trouvant déjà sur le plateau.\n"
-				+ "- réaliser ainsi un carré de billes de sa couleur.\n"
-				+ "- reprendre tout de suite soit une, soit deux de ses billes pour les remettre en réserve.");
+		textRules3.setText("Dans le mÃ©me coup, un joueur a la possibilitÃ© de :\n"
+				+ "- monter une de ses billes se trouvant dÃ©jÃ  sur le plateau.\n"
+				+ "- rÃ©aliser ainsi un carrÃ© de billes de sa couleur.\n"
+				+ "- reprendre tout de suite soit une, soit deux de ses billes pour les remettre en rÃ©serve.");
 
 		textRules.setFont(Font.font("arial", 18));
 		textRules1.setFont(Font.font("arial", 18));
