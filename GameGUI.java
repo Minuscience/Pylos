@@ -1,6 +1,8 @@
 import moleculesampleapp.Xform;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -8,29 +10,36 @@ import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class GameGUI extends Application {
+	private Group game3dBox = new Group();
+	private BorderPane game2dBox = new BorderPane();
+	Label player1;
+	Label player2;
 	final PerspectiveCamera camera = new PerspectiveCamera(true);
 	final Xform cameraXform1 = new Xform();
 	final Xform cameraXform2 = new Xform();
 	final Xform cameraXform3 = new Xform();
-	final double cameraDistance = 850;
-	double mousePosX;
-    double mousePosY;
-    double mouseOldX;
-    double mouseOldY;
-    double mouseDeltaX;
-    double mouseDeltaY;
+	final double cameraDistance = 800;
+	private double mousePosX;
+    private double mousePosY;
+    private double mouseOldX;
+    private double mouseOldY;
+    private double mouseDeltaX;
+    private double mouseDeltaY;
 	
 	public static void main(String[] args) {
         launch(args);
@@ -46,27 +55,35 @@ public class GameGUI extends Application {
 		cameraXform3.setRotateZ(180.0);
 		cameraXform2.getChildren().add(cameraXform3);
 		cameraXform1.getChildren().add(cameraXform2);	
-		cameraXform1.ry.setAngle(320.0);
-		cameraXform1.rx.setAngle(40);
+//		cameraXform1.ry.setAngle(320.0);
+		cameraXform1.rx.setAngle(80);
 		
 		Group gameAxis = gameAxis();
 		
-		Group field3D = game3d();
-		field3D.getChildren().add(cameraXform1);
-		field3D.getChildren().add(gameAxis);
+		setGame3d();
+		game3dBox.getChildren().add(cameraXform1);
+		game3dBox.getChildren().add(gameAxis);
 		
 		BorderPane root = new BorderPane();
-		Group subRoot = new Group();
+		Group subRoot3d = new Group();
+		Group subRoot2d = new Group();
 		
-		Scene scene = new Scene(root, 900, 800, Color.WHITE);
-		SubScene subScene = new SubScene(subRoot, 900, 500, true, SceneAntialiasing.BALANCED);
+		Scene scene = new Scene(root, 900, 750, Color.WHITE);
+		SubScene subScene3d = new SubScene(subRoot3d, 900, 500, true, SceneAntialiasing.BALANCED);
+		SubScene subScene2d = new SubScene(subRoot2d, 900, 200, true, SceneAntialiasing.BALANCED);
 		
-		subScene.setCamera(camera);
-		subRoot.getChildren().add(field3D);
-		root.setTop(subScene);
+		subScene3d.setCamera(camera);
+		subRoot3d.getChildren().add(game3dBox);
+		
+		game2dBox = setGame2d();
+		game2dBox.setMinWidth(800);
+		subRoot2d.getChildren().add(game2dBox);
+		
+		root.setTop(subScene3d);
+		root.setCenter(subScene2d);
 		root.setBottom(menuBox);
 		
-		handleMouse(scene, field3D);
+		handleMouse(scene, game3dBox);
 		
 		primaryStage.setTitle("Pylos");
 		primaryStage.setScene(scene);
@@ -152,35 +169,102 @@ public class GameGUI extends Application {
 		return ball;
 	}
 	
-	private Group game3d(){
+	private void setGame3d(){
 		final PhongMaterial greyMaterial = new PhongMaterial();
 		greyMaterial.setDiffuseColor(Color.DARKGREY);
 		greyMaterial.setSpecularColor(Color.GREY);
-	       
-		Box box = new Box(400, 10, 400);
+	    
+		// Game board
+		Box box = new Box(340, 10, 350);
 		box.setMaterial(greyMaterial);
 		
 		Xform boxXform = new Xform();
 		boxXform.getChildren().add(box);
 		boxXform.setTranslateY(-40);
 		
-		Ball3D ball = createBall3D(30, "black");
+		// Game balls
+		Ball3D ball = createBall3D(30, "white");
+		ball.setTranslate("x", 40);
+		ball.setTranslate("z", 40);
 		Ball3D ball2 = createBall3D(30, "white");
-		ball2.setTranslate("x", 80);
-		Ball3D ball3 = createBall3D(30, "black");
-		ball3.setTranslate("z", 80);
+		ball2.setTranslate("x", -40);
+		ball2.setTranslate("z", 40);
+		Ball3D ball3 = createBall3D(30, "white");
+		ball3.setTranslate("x", 40);
+		ball3.setTranslate("z", -40);
 		Ball3D ball4 = createBall3D(30, "white");
-		ball4.setTranslate("x", 80);
-		ball4.setTranslate("z", 80);	
+		ball4.setTranslate("x", -40);
+		ball4.setTranslate("z", -40);	
+		Ball3D ball5 = createBall3D(30, "white");
+		ball5.setTranslate("x", 40);
+		ball5.setTranslate("z", 120);
+		Ball3D ball6 = createBall3D(30, "white");
+		ball6.setTranslate("x", -40);
+		ball6.setTranslate("z", 120);
+		Ball3D ball7 = createBall3D(30, "black");
+		ball7.setTranslate("x", 40);
+		ball7.setTranslate("z", -120);
+		Ball3D ball8 = createBall3D(30, "black");
+		ball8.setTranslate("x", -40);
+		ball8.setTranslate("z", -120);
+		Ball3D ball9 = createBall3D(30, "black");
+		ball9.setTranslate("x", 120);
+		ball9.setTranslate("z", 40);
 		
-		Group game3dBox = new Group();
 		game3dBox.getChildren().add(boxXform);
 		game3dBox.getChildren().add(ball.getXformBall());
 		game3dBox.getChildren().add(ball2.getXformBall());
 		game3dBox.getChildren().add(ball3.getXformBall());
 		game3dBox.getChildren().add(ball4.getXformBall());
+		game3dBox.getChildren().add(ball5.getXformBall());
+		game3dBox.getChildren().add(ball6.getXformBall());
+		game3dBox.getChildren().add(ball7.getXformBall());
+		game3dBox.getChildren().add(ball8.getXformBall());
+		game3dBox.getChildren().add(ball9.getXformBall());
+	}
+	
+	private BorderPane setGame2d(){
+		BorderPane game2dPane = new BorderPane();
 		
-		return game3dBox;
+		// BorderPane LEFT content
+		player1 = new Label("PLAYER 1");
+		player1.setPadding(new Insets(5,5,5,5));
+		player1.setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+		player2 = new Label("PLAYER 2");
+		player2.setPadding(new Insets(5,5,5,5));
+		player2.setStyle("-fx-border-width: 1; -fx-border-color: black");
+		VBox playersBox = new VBox();
+		playersBox.setAlignment(Pos.CENTER);
+		playersBox.setSpacing(10);
+		playersBox.getChildren().addAll(player1, player2);
+		
+		game2dPane.setLeft(playersBox);
+		
+		// BorderPane CENTER content
+		Group circles = new Group();
+		
+		int posX = 0;
+		int posY = 0;
+		for(int i = 1; i <= 16; i++){
+			if ((i-1) % 4 == 0){
+				posX = 0;
+				posY += 41;
+			}
+			
+			Circle2D circle = new Circle2D(20.0f);
+			circle.setPosX(posX);
+			circle.setPosY(posY);
+			circle.setStroke(Color.BLACK, 2);
+			circle.setColor(Color.WHITE);
+			
+			circles.getChildren().add(circle.getCircle());
+			
+			posX += 41;
+		}
+		
+		game2dPane.setCenter(circles);
+		
+		return game2dPane;
 	}
 	
 	private HBox gameMenu(Stage primaryStage){

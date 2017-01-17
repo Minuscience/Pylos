@@ -29,8 +29,6 @@ public class Player {
 		this.turn = turn;
 	}
 
-<<<<<<< HEAD
-=======
 	public ArrayList<Ball> getMyBall() {
 		return myBall;
 	}
@@ -39,7 +37,6 @@ public class Player {
 		this.myBall = myBall;
 	}
 
->>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 	// un joueur peut jouer si c'est son tour et qu'il a des boules
 	/**
 	 * Check if it's the player turn and if he had free ball in his pool

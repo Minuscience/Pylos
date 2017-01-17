@@ -70,10 +70,6 @@ public class Board {
 		return false;
 	}
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 	/**
 	 * Put the ball in parameter on the board
 	 * 
@@ -91,8 +87,6 @@ public class Board {
 		return false;
 	}
 
-<<<<<<< HEAD
-=======
 	/**
 	 * Check if a ball has another on top of it
 	 * 
@@ -145,5 +139,4 @@ public class Board {
 			return true;
 		}
 	}
->>>>>>> af3c5884acf774fec9abe91864ae79cb98eb20e3
 }
