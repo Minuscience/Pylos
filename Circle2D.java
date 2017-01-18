@@ -5,6 +5,7 @@ public class Circle2D {
 	private Circle circle;
 	private int posX;
 	private int posY;
+
 	
 	public Circle2D(float radius){
 		circle = new Circle();

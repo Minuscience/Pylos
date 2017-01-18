@@ -40,7 +40,7 @@ public class GameGUI extends Application {
 	final Xform cameraXform1 = new Xform();
 	final Xform cameraXform2 = new Xform();
 	final Xform cameraXform3 = new Xform();
-	final double cameraDistance = 800;
+	final double cameraDistance = 1000;
 	private double mousePosX;
 	private double mousePosY;
 	private double mouseOldX;
@@ -56,7 +56,7 @@ public class GameGUI extends Application {
 		HBox menuBox = gameMenu(primaryStage);
 
 		camera.setNearClip(0.1);
-		camera.setFarClip(1000.0);
+		camera.setFarClip(1500.0);
 		camera.setTranslateZ(-cameraDistance);
 		cameraXform3.getChildren().add(camera);
 		cameraXform3.setRotateZ(180.0);
@@ -263,7 +263,7 @@ public class GameGUI extends Application {
 			Circle2D circle = new Circle2D(20.0f);
 			circle.setPosX(posX);
 			circle.setPosY(posY);
-			circle.setStroke(Color.BLACK, 2);
+			circle.setStroke(Color.GRAY, 2);
 			circle.setColor(Color.WHITE);
 
 			circles.getChildren().add(circle.getCircle());
