@@ -295,16 +295,16 @@ public class GameGUI extends Application {
 		for (int lv = 0; lv < 4; lv++) {
 			for (int x = 0; x <= lv; x++) {
 				for (int y = 0; y <= lv; y++) {
-					Boule b = new Boule(board, lv, x, y);
-					if (board.getBall(lv, x, y) == null){
-						Circle2D circle = new Circle2D(20.0f);
-						circle.setStroke(Color.GRAY, 2);
-						circle.setColor(Color.WHITE);
-						circle.setPosX(lv*170+x*41);
-						circle.setPosY(y*41);
-						circles.getChildren().add(circle.getCircle());
-						b.setBoule2D(circle);
-					}
+//					Boule b = new Boule(board, lv, x, y);
+//					if (board.getBall(lv, x, y) == null){
+//						Circle2D circle = new Circle2D(20.0f);
+//						circle.setStroke(Color.GRAY, 2);
+//						circle.setColor(Color.WHITE);
+//						circle.setPosX(lv*170+x*41);
+//						circle.setPosY(y*41);
+//						circles.getChildren().add(circle.getCircle());
+//						b.setBoule2D(circle);
+//					}
 //					if (board.getBall(lv, x, y) == null) {
 //						Boule test = new Boule(true);
 //						Circle2D circle = test.getBoule2D();
