@@ -31,15 +31,15 @@ public class GameThread implements Runnable {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
-		gammers[0].placeBallOn(board, 3, 0, 1, game3dBox);
-		gammers[0].placeBallOn(board, 3, 1, 1, game3dBox);
-		gammers[0].placeBallOn(board, 3, 1, 0, game3dBox);
-		gammers[1].placeBallOn(board, 3, 3, 3, game3dBox);
-		gammers[1].placeBallOn(board, 3, 2, 2, game3dBox);
-		gammers[1].placeBallOn(board, 3, 2, 3, game3dBox);
-		System.out.println(board);
-		System.out.println(gammers[0]);
-		System.out.println(gammers[1]);
+//		gammers[0].placeBallOn(board, 3, 0, 1, game3dBox);
+//		gammers[0].placeBallOn(board, 3, 1, 1, game3dBox);
+//		gammers[0].placeBallOn(board, 3, 1, 0, game3dBox);
+//		gammers[1].placeBallOn(board, 3, 3, 3, game3dBox);
+//		gammers[1].placeBallOn(board, 3, 2, 2, game3dBox);
+//		gammers[1].placeBallOn(board, 3, 2, 3, game3dBox);
+//		System.out.println(board);
+//		System.out.println(gammers[0]);
+//		System.out.println(gammers[1]);
 		
 		while(!board.onTop()) {
 			for (int j = 0; j < gammers.length; j++) {

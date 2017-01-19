@@ -15,7 +15,7 @@ public class Ball3D {
 		whiteMaterial.setSpecularColor(Color.LIGHTBLUE);
 		
 		blackMaterial = new PhongMaterial();
-		blackMaterial.setDiffuseColor(Color.BLACK);
+		blackMaterial.setDiffuseColor(Color.BROWN);
 		blackMaterial.setSpecularColor(Color.LIGHTGRAY);
 		
 		sphere = new Sphere(size);

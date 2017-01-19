@@ -1,6 +1,7 @@
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -9,9 +10,15 @@ public class Boule extends Ball {
 	private Ball3D boule3D;
 	private Board board;
 	private Position pos;
+	private Group game3dBox;
+	private Player[] gammers;
+	private Label[] labelPlayers;
 
-	public Boule(Board board, int lv, int x, int y){
+	public Boule(Board board, Group game3dBox, Player[] gammers, Label[] labelPlayers, int lv, int x, int y){
 		this.board = board;
+		this.game3dBox = game3dBox;
+		this.gammers = gammers;
+		this.labelPlayers = labelPlayers;
 		boule2D = new Circle2D(20.0f);
 		boule3D = new Ball3D(40);
 		pos = new Position(lv, x, y);
@@ -47,7 +54,22 @@ public class Boule extends Ball {
 			@Override
 			public void handle(MouseEvent me) {
 				System.out.println(pos.lv + " " + pos.x + " " + pos.y);
-				
+				if (gammers[0].isTurn()){
+					if (gammers[0].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)){
+						gammers[0].setTurn(false);
+						gammers[1].setTurn(true);
+						labelPlayers[1].setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+						labelPlayers[0].setStyle("-fx-border-width: 1; -fx-border-color: black");
+					}
+				}
+				else{
+					if (gammers[1].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)){
+						gammers[1].setTurn(false);
+						gammers[0].setTurn(true);
+						labelPlayers[0].setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+						labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
+					}
+				}
 			}
 		});
 	}
@@ -77,9 +99,9 @@ public class Boule extends Ball {
 		if (lv == 2)
 			setTranslate3D(80-(80*x), 40, 80-(80*y));
 		if (lv == 1)
-			setTranslate3D(120-(80*x), 120, 120-(80*y));
+			setTranslate3D(40-(80*x), 80, 40-(80*y));
 		if (lv == 0)
-			setTranslate3D(0, 160, 0);
+			setTranslate3D(0, 120, 0);
 	}
 	
 	
