@@ -63,10 +63,8 @@ public class GameGUI extends Application {
 
 	public static Player[] gammers;
 	public static Label[] labelPlayers;
-	public static Boule[] tabBoule;
 	public static Scanner scan;
 	public static Thread game;
-	public static Writer writer;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -301,33 +299,8 @@ public class GameGUI extends Application {
 						circle.setPosY(y*41);
 						circles.getChildren().add(circle.getCircle());
 						b.setBoule2D(circle);
-					}
-					
-//					if (board.getBall(lv, x, y) == null) {
-//						Boule test = new Boule(true);
-//						Circle2D circle = test.getBoule2D();
-//						circle = new Circle2D(20.0f);
-//						circle.setStroke(Color.GRAY, 2);
-//						circle.setColor(Color.WHITE);
-//						circle.setPosX(lv*170+x*41);
-//						circle.setPosY(y*41);
-//						circles.getChildren().add(circle.getCircle());
-//					}else if(board.getBall(lv, x, y).isBlack()){
-//						System.out.println("test testttttttttttttttttttttt");
-//						Circle2D circle = board.getBall(lv, x, y).getBoule2D();
-//						circle.setStroke(Color.WHITE, 2);
-//						circle.setColor(Color.BLACK);
-//						circle.setPosX(lv*170+x*41);
-//						circle.setPosY(y*41);
-//						circles.getChildren().add(circle.getCircle());
-//					}else{
-//						Circle2D circle = board.getBall(lv, x, y).getBoule2D();
-//						circle.setStroke(Color.BEIGE, 2);
-//						circle.setColor(Color.WHITE);
-//						circle.setPosX(lv*170+x*41);
-//						circle.setPosY(y*41);
-//						circles.getChildren().add(circle.getCircle());
-//					}	
+
+					}	
 				}
 			}
 		}
