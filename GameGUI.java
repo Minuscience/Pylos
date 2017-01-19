@@ -275,7 +275,7 @@ public class GameGUI extends Application {
 		newGameLabel.setPrefWidth(300);
 		newGameLabel.setWrapText(true);
 
-		newGame.setNewGame(newGameLabel);
+		//newGame.setNewGame(newGameLabel);
 
 		Menu newGameMenu = new Menu();
 		newGameMenu.setGraphic(newGameLabel);
@@ -322,8 +322,8 @@ public class GameGUI extends Application {
 				popupHelp.setTitle("Besoin d'aide?");
 				popupHelp.getIcons().add(new Image("file:img/help.png"));
 				VBox dialogVbox = new VBox(20);
-				dialogVbox.getChildren().add(new Text("Ceci va vous aider"));
-				Scene dialogScene = new Scene(dialogVbox, 300, 200);
+				dialogVbox.getChildren().add(Help.finalVboxHelp());
+				Scene dialogScene = new Scene(dialogVbox, 920, 150);
 				popupHelp.setScene(dialogScene);
 				popupHelp.show();
 			}
