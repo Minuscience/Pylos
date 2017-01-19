@@ -20,7 +20,7 @@ public class Board {
 	}
 
 	// retourne une balle sur le plateau
-	public Ball getBall(int lv, int x, int y) {
+	public Boule getBall(int lv, int x, int y) {
 		return board[lv].getBall(x, y);
 	}
 
@@ -54,7 +54,7 @@ public class Board {
 	}
 
 	// place la boule ball sur le plateau
-	public boolean setBall(Ball ball, int lv, int x, int y) {
+	public boolean setBall(Boule ball, int lv, int x, int y) {
 		if (isEmpty(lv, x, y)) {
 
 			board[lv].setBall(ball, x, y);

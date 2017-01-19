@@ -1,14 +1,16 @@
 import java.util.ArrayList;
 
+import javafx.scene.Group;
+
 public class Player {
 	private final boolean isBlack;
-	private ArrayList<Ball> myBall;
+	private ArrayList<Boule> myBall;
 	private boolean turn;
 
 	public Player(boolean color) {
-		myBall = new ArrayList<Ball>();
+		myBall = new ArrayList<Boule>();
 		for (int i = 0; i < 15; i++) {
-			myBall.add(new Ball(color));
+			myBall.add(new Boule(color));
 		}
 		turn = color;
 		isBlack = color;
@@ -41,20 +43,22 @@ public class Player {
 		return false;
 	}
 
-	public Ball playableBall() {
-		for (Ball ball : myBall) {
+	public Boule playableBall() {
+		for (Boule ball : myBall) {
 			if (!ball.isOnBoard())
 				return ball;
 		}
 		return null;
 	}
 
-	public boolean placeBallOn(Board b, int lv, int x, int y) {
-		if (!canPlay() && !b.playableCase(lv, x, y))
+	public boolean placeBallOn(Board board, int lv, int x, int y) {
+		if (!canPlay() && !board.playableCase(lv, x, y))
 			return false;
-		Ball current = playableBall();
-		b.setBall(current, lv, x, y);
+		Boule current = playableBall();
+		board.setBall(current, lv, x, y);
 		current.getPlace().setPosition(lv, x, y);
+		current.place3D(lv, x, y);
+		GameGUI.draw3D();
 		current.setOnBoard(true);
 		return true;
 	}

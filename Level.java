@@ -2,25 +2,25 @@
 public class Level {
 	//classe de niveau 
 	//il y a 4 niveau de 0 (le sommet) a 3
-	private Ball[][] grid;
+	private Boule[][] grid;
 
-	public Level(int lenght) {
-		grid = new Ball[lenght][lenght];
+	public Level(int length) {
+		grid = new Boule[length][length];
 	}
 
 	public Ball[][] getGrid() {
 		return grid;
 	}
 
-	public void setGrid(Ball[][] grid) {
+	public void setGrid(Boule[][] grid) {
 		this.grid = grid;
 	}
 	
-	public Ball getBall(int i,int j){
+	public Boule getBall(int i,int j){
 		return grid[i][j];
 	}
 	
-	public void setBall(Ball ball, int x, int y){
+	public void setBall(Boule ball, int x, int y){
 		grid[x][y]= ball;
 	}
 	

@@ -1,3 +1,5 @@
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -5,11 +7,12 @@ public class Circle2D {
 	private Circle circle;
 	private int posX;
 	private int posY;
-
+	
 	
 	public Circle2D(float radius){
 		circle = new Circle();
 		circle.setRadius(radius);
+		
 	}
 	
 	public Circle getCircle(){

@@ -1,4 +1,5 @@
 import java.util.Optional;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -32,7 +33,7 @@ import javafx.stage.WindowEvent;
 import moleculesampleapp.Xform;
 
 public class GameGUI extends Application {
-	private Group game3dBox = new Group();
+	private static Group game3dBox = new Group();
 	private BorderPane game2dBox = new BorderPane();
 	Label player1;
 	Label player2;
@@ -47,6 +48,14 @@ public class GameGUI extends Application {
 	private double mouseOldY;
 	private double mouseDeltaX;
 	private double mouseDeltaY;
+
+	public static final int LEVELS = 4;
+	public static final int BALLS = 30;
+	public static Board board;
+	public static Player j1;
+	public static Player j2;
+	public static Player[] gammers;
+	public static Scanner scan;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -65,11 +74,18 @@ public class GameGUI extends Application {
 		// cameraXform1.ry.setAngle(320.0);
 		cameraXform1.rx.setAngle(80);
 
-		Group gameAxis = gameAxis();
+		board = new Board();
+		j1 = new Player(false);
+		j2 = new Player(true);
+		gammers = new Player[2];
+		gammers[0] = j1;
+		gammers[1] = j2;
+		scan = new Scanner(System.in);
+		int lv, x, y;
 
-		setGame3d();
-		game3dBox.getChildren().add(cameraXform1);
+		Group gameAxis = gameAxis();
 		game3dBox.getChildren().add(gameAxis);
+		setGame3d();
 
 		BorderPane root = new BorderPane();
 		Group subRoot3d = new Group();
@@ -89,13 +105,16 @@ public class GameGUI extends Application {
 		root.setTop(subScene3d);
 		root.setCenter(subScene2d);
 		root.setBottom(menuBox);
+		Thread game = new Thread(new GameThread(gammers, scan, board, game3dBox, this));
+		game.start();
 
 		handleMouse(scene, game3dBox);
-
+		primaryStage.show();
 		primaryStage.setTitle("Pylos");
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.show();
+
 	}
 
 	private void handleMouse(Scene scene, final Node root) {
@@ -178,7 +197,7 @@ public class GameGUI extends Application {
 		return ball;
 	}
 
-	private void setGame3d() {
+	void setGame3d() {
 		final PhongMaterial greyMaterial = new PhongMaterial();
 		greyMaterial.setDiffuseColor(Color.DARKGREY);
 		greyMaterial.setSpecularColor(Color.GREY);
@@ -192,44 +211,11 @@ public class GameGUI extends Application {
 		boxXform.setTranslateY(-40);
 
 		// Game balls
-		Ball3D ball = createBall3D(30, "white");
-		ball.setTranslate("x", 40);
-		ball.setTranslate("z", 40);
-		Ball3D ball2 = createBall3D(30, "white");
-		ball2.setTranslate("x", -40);
-		ball2.setTranslate("z", 40);
-		Ball3D ball3 = createBall3D(30, "white");
-		ball3.setTranslate("x", 40);
-		ball3.setTranslate("z", -40);
-		Ball3D ball4 = createBall3D(30, "white");
-		ball4.setTranslate("x", -40);
-		ball4.setTranslate("z", -40);
-		Ball3D ball5 = createBall3D(30, "white");
-		ball5.setTranslate("x", 40);
-		ball5.setTranslate("z", 120);
-		Ball3D ball6 = createBall3D(30, "white");
-		ball6.setTranslate("x", -40);
-		ball6.setTranslate("z", 120);
-		Ball3D ball7 = createBall3D(30, "black");
-		ball7.setTranslate("x", 40);
-		ball7.setTranslate("z", -120);
-		Ball3D ball8 = createBall3D(30, "black");
-		ball8.setTranslate("x", -40);
-		ball8.setTranslate("z", -120);
-		Ball3D ball9 = createBall3D(30, "black");
-		ball9.setTranslate("x", 120);
-		ball9.setTranslate("z", 40);
+		draw3D();
 
 		game3dBox.getChildren().add(boxXform);
-		game3dBox.getChildren().add(ball.getXformBall());
-		game3dBox.getChildren().add(ball2.getXformBall());
-		game3dBox.getChildren().add(ball3.getXformBall());
-		game3dBox.getChildren().add(ball4.getXformBall());
-		game3dBox.getChildren().add(ball5.getXformBall());
-		game3dBox.getChildren().add(ball6.getXformBall());
-		game3dBox.getChildren().add(ball7.getXformBall());
-		game3dBox.getChildren().add(ball8.getXformBall());
-		game3dBox.getChildren().add(ball9.getXformBall());
+		game3dBox.getChildren().add(cameraXform1);
+
 	}
 
 	private BorderPane setGame2d() {
@@ -369,4 +355,21 @@ public class GameGUI extends Application {
 		return menuBox;
 
 	}
+
+	static void draw3D() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j <= i; j++) {
+				for (int k = 0; k <= i; k++) {
+					if (!board.isEmpty(i, j, k))
+						if (!board.getBall(i, j, k).isOnBoard())
+							board.getBall(i, j, k).removeOnGroup3D(game3dBox);
+						else
+							board.getBall(i, j, k).placeOnGroup3D(game3dBox);
+				}
+
+			}
+		}
+
+	}
+
 }
