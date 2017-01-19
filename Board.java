@@ -1,3 +1,4 @@
+import javafx.scene.paint.Color;
 
 public class Board {
 	private Level[] board;
@@ -6,6 +7,18 @@ public class Board {
 		board = new Level[4];
 		for (int i = 0; i < board.length; i++) {
 			board[i] = new Level(i + 1);
+		}
+		for (int lv = 0; lv < 4; lv++) {
+			for (int x = 0; x <= lv; x++) {
+				for (int y = 0; y <= lv; y++) {
+						Circle2D circle = board[lv].getBall(x, y).getBoule2D();
+						circle = new Circle2D(20.0f);
+						circle.setStroke(Color.GRAY, 2);
+						circle.setColor(Color.WHITE);
+						circle.setPosX(lv*170+x*41);
+						circle.setPosY(y*41);
+				}
+			}
 		}
 	}
 
@@ -152,7 +165,7 @@ public class Board {
 				else if (y == 0)
 					return square(lv, x - 1, y);
 				else
-					return square(lv, x-1, y - 1) || square(lv, x-1, y);
+					return square(lv, x - 1, y - 1) || square(lv, x - 1, y);
 			} else if (y == 0) {
 				return square(lv, x - 1, y) || square(lv, x, y);
 			} else if (y == lv) {

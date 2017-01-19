@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
@@ -46,10 +47,11 @@ public class Boule extends Ball {
 	}
 	
 	public void placeOnGroup3D(Group group){
-		group.getChildren().add(boule3D.getXformBall());
+		Platform.runLater(new Place3D(boule3D, group));
+				
 	}
 	public void removeOnGroup3D(Group group){
-		group.getChildren().remove(boule3D.getXformBall());
+		Platform.runLater(new Remove3D(boule3D, group));
 	}
 	public void place3D(int lv, int x, int y){
 		if (lv == 3)
@@ -61,9 +63,12 @@ public class Boule extends Ball {
 		if (lv == 0)
 			setTranslate3D(0, 160, 0);
 	}
+	
+	
 	public void setTranslate3D(int x,int y,int z){
 		boule3D.setTranslate("x", x);
 		boule3D.setTranslate("y", y);
 		boule3D.setTranslate("z", z);
 	}
+	
 }

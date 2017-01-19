@@ -54,7 +54,7 @@ public class GameGUI extends Application {
 	public static Board board;
 	public static Player j1;
 	public static Player j2;
-	
+
 	public static Player[] gammers;
 	public static Scanner scan;
 
@@ -82,10 +82,8 @@ public class GameGUI extends Application {
 		gammers[0] = j1;
 		gammers[1] = j2;
 		scan = new Scanner(System.in);
-		int lv, x, y;
+		
 
-		Group gameAxis = gameAxis();
-		game3dBox.getChildren().add(gameAxis);
 		setGame3d();
 
 		BorderPane root = new BorderPane();
@@ -109,7 +107,7 @@ public class GameGUI extends Application {
 		draw3D();
 		Thread game = new Thread(new GameThread(gammers, scan, board, game3dBox));
 		game.start();
-		
+
 		handleMouse(scene, game3dBox);
 		primaryStage.setTitle("Pylos");
 		primaryStage.setScene(scene);
@@ -164,32 +162,7 @@ public class GameGUI extends Application {
 		});
 	}
 
-	private Group gameAxis() {
-		final PhongMaterial redMaterial = new PhongMaterial();
-		redMaterial.setDiffuseColor(Color.DARKRED);
-		redMaterial.setSpecularColor(Color.RED);
-
-		final PhongMaterial greenMaterial = new PhongMaterial();
-		greenMaterial.setDiffuseColor(Color.DARKGREEN);
-		greenMaterial.setSpecularColor(Color.GREEN);
-
-		final PhongMaterial blueMaterial = new PhongMaterial();
-		blueMaterial.setDiffuseColor(Color.DARKBLUE);
-		blueMaterial.setSpecularColor(Color.BLUE);
-
-		final Box xAxis = new Box(240.0, 1, 1);
-		final Box yAxis = new Box(1, 240.0, 1);
-		final Box zAxis = new Box(1, 1, 240.0);
-
-		xAxis.setMaterial(redMaterial);
-		yAxis.setMaterial(greenMaterial);
-		zAxis.setMaterial(blueMaterial);
-
-		Group axisGroup = new Group();
-		axisGroup.getChildren().addAll(xAxis, yAxis, zAxis);
-
-		return axisGroup;
-	}
+	
 
 	private Ball3D createBall3D(double size, String color) {
 		Ball3D ball = new Ball3D(40);
@@ -219,6 +192,22 @@ public class GameGUI extends Application {
 
 	}
 
+	static void draw3D() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j <= i; j++) {
+				for (int k = 0; k <= i; k++) {
+					if (!board.isEmpty(i, j, k))
+						if (!board.getBall(i, j, k).isOnBoard())
+							board.getBall(i, j, k).removeOnGroup3D(game3dBox);
+						else
+							board.getBall(i, j, k).placeOnGroup3D(game3dBox);
+				}
+
+			}
+		}
+
+	}
+
 	private BorderPane setGame2d() {
 		BorderPane game2dPane = new BorderPane();
 
@@ -226,7 +215,7 @@ public class GameGUI extends Application {
 		player1 = new Label("PLAYER 1");
 		player1.setPadding(new Insets(5, 5, 5, 5));
 		player1.setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
-		
+
 		player2 = new Label("PLAYER 2");
 		player2.setPadding(new Insets(5, 5, 5, 5));
 		player2.setStyle("-fx-border-width: 1; -fx-border-color: black");
@@ -239,24 +228,40 @@ public class GameGUI extends Application {
 
 		// BorderPane CENTER content
 		Group circles = new Group();
+		
+		for (int lv = 0; lv < 4; lv++) {
+			for (int x = 0; x <= lv; x++) {
+				for (int y = 0; y <= lv; y++) {
+					if (board.getBall(lv, x, y) == null) {
+						Boule test = new Boule(true);
+						Circle2D circle = test.getBoule2D();
+						circle = new Circle2D(20.0f);
+						circle.setStroke(Color.GRAY, 2);
+						circle.setColor(Color.WHITE);
+						circle.setPosX(lv*170+x*41);
+						circle.setPosY(y*41);
+						circles.getChildren().add(circle.getCircle());
+					}else if(board.getBall(lv, x, y).isBlack()){
+						System.out.println("test testttttttttttttttttttttt");
+						Circle2D circle = board.getBall(lv, x, y).getBoule2D();
+						circle.setStroke(Color.WHITE, 2);
+						circle.setColor(Color.BLACK);
+						circle.setPosX(lv*170+x*41);
+						circle.setPosY(y*41);
+						circles.getChildren().add(circle.getCircle());
+					}else{
+						Circle2D circle = board.getBall(lv, x, y).getBoule2D();
+						circle.setStroke(Color.BEIGE, 2);
+						circle.setColor(Color.WHITE);
+						circle.setPosX(lv*170+x*41);
+						circle.setPosY(y*41);
+						circles.getChildren().add(circle.getCircle());
+					}
+						
+					
+				}
 
-		int posX = 0;
-		int posY = 0;
-		for (int i = 1; i <= 16; i++) {
-			if ((i - 1) % 4 == 0) {
-				posX = 0;
-				posY += 41;
 			}
-
-			Circle2D circle = new Circle2D(20.0f);
-			circle.setPosX(posX);
-			circle.setPosY(posY);
-			circle.setStroke(Color.GRAY, 2);
-			circle.setColor(Color.WHITE);
-
-			circles.getChildren().add(circle.getCircle());
-
-			posX += 41;
 		}
 
 		game2dPane.setCenter(circles);
@@ -349,29 +354,13 @@ public class GameGUI extends Application {
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == yes) {
-					Platform.exit();
-					
+					System.exit(0);
+
 				}
 			}
 		});
 
 		return menuBox;
-
-	}
-
-	static void draw3D() {
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j <= i; j++) {
-				for (int k = 0; k <= i; k++) {
-					if (!board.isEmpty(i, j, k))
-						if (!board.getBall(i, j, k).isOnBoard())
-							board.getBall(i, j, k).removeOnGroup3D(game3dBox);
-						else
-							board.getBall(i, j, k).placeOnGroup3D(game3dBox);
-				}
-
-			}
-		}
 
 	}
 
