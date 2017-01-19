@@ -1,3 +1,4 @@
+import java.io.Writer;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -56,14 +57,16 @@ public class GameGUI extends Application {
 
 	public static final int LEVELS = 4;
 	public static final int BALLS = 30;
-	public static Board board;
+	public static Board board = new Board();
 	public static Player j1;
 	public static Player j2;
 
 	public static Player[] gammers;
 	public static Label[] labelPlayers;
+	public static Boule[] tabBoule;
 	public static Scanner scan;
 	public static Thread game;
+	public static Writer writer;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -81,13 +84,8 @@ public class GameGUI extends Application {
 		cameraXform1.getChildren().add(cameraXform2);
 		// cameraXform1.ry.setAngle(320.0);
 		cameraXform1.rx.setAngle(80);
-
 		
-
-
-
 		BorderPane root = new BorderPane();
-		
 
 		scene = new Scene(root, 900, 750, Color.WHITE);
 		SubScene subScene3d = new SubScene(subRoot3d, 900, 500, true, SceneAntialiasing.BALANCED);
@@ -96,18 +94,12 @@ public class GameGUI extends Application {
 		subScene3d.setCamera(camera);
 		subRoot3d.getChildren().add(game3dBox);
 
-		game2dBox = setGame2d();
-		game2dBox.setMinWidth(800);
-		subRoot2d.getChildren().add(game2dBox);
-
 		root.setTop(subScene3d);
 		root.setCenter(subScene2d);
 		root.setBottom(menuBox);
-				setGame3d();
-
+		setGame3d();
 
 		// Menu start
-
 		Image background = new Image("file:src/img/background.jpg");
 		
 		ImageView imgNg = new ImageView(new Image("file:src/img/newgame.png"));
@@ -115,9 +107,8 @@ public class GameGUI extends Application {
 			@Override
 			public void handle(MouseEvent event) {
 				primaryStage.setScene(scene);
-				board = new Board();
-				j1 = new Player(false);
-				j2 = new Player(true);
+				j1 = new Player(true);
+				j2 = new Player(false);
 				gammers = new Player[2];
 				gammers[0] = j1;
 				gammers[1] = j2;
@@ -128,6 +119,10 @@ public class GameGUI extends Application {
 				game = new Thread(new GameThread(gammers, scan, board, game3dBox, labelPlayers));
 				game.start();
 				draw3D();
+				
+				game2dBox = setGame2d();
+				game2dBox.setMinWidth(800);
+				subRoot2d.getChildren().add(game2dBox);
 			}
 		});
 		imgNg.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -292,19 +287,22 @@ public class GameGUI extends Application {
 		Group circles = new Group();
 		circles.setTranslateX(30);
 		
+		int i = 0;
 		for (int lv = 0; lv < 4; lv++) {
 			for (int x = 0; x <= lv; x++) {
 				for (int y = 0; y <= lv; y++) {
-//					Boule b = new Boule(board, lv, x, y);
-//					if (board.getBall(lv, x, y) == null){
-//						Circle2D circle = new Circle2D(20.0f);
-//						circle.setStroke(Color.GRAY, 2);
-//						circle.setColor(Color.WHITE);
-//						circle.setPosX(lv*170+x*41);
-//						circle.setPosY(y*41);
-//						circles.getChildren().add(circle.getCircle());
-//						b.setBoule2D(circle);
-//					}
+
+					Boule b = new Boule(board, game3dBox, gammers, labelPlayers, lv, x, y);
+					if (board.getBall(lv, x, y) == null){
+						Circle2D circle = new Circle2D(20.0f);
+						circle.setStroke(Color.GRAY, 2);
+						circle.setColor(Color.WHITE);
+						circle.setPosX(lv*170+x*41);
+						circle.setPosY(y*41);
+						circles.getChildren().add(circle.getCircle());
+						b.setBoule2D(circle);
+					}
+					
 //					if (board.getBall(lv, x, y) == null) {
 //						Boule test = new Boule(true);
 //						Circle2D circle = test.getBoule2D();
