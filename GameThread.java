@@ -46,7 +46,7 @@ public class GameThread implements Runnable {
 				labelPlayers[j].setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 				labelPlayers[(j + 1) % 2].setStyle("-fx-border-width: 1; -fx-border-color: black");
 
-				System.out.println("joueur" + j + " a vous de jouer");
+				System.out.println("joueur " + j + " à vous de jouer");
 				System.out.println("veuillez entrer le niveau et les coordon�es");
 				lv = scan.nextInt();
 				x = scan.nextInt();
