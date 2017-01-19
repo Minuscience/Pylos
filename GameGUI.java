@@ -332,7 +332,7 @@ public class GameGUI extends Application {
 		newGameLabel.setPrefWidth(300);
 		newGameLabel.setWrapText(true);
 
-		//newGame.setNewGame(newGameLabel);
+		newGame.setNewGame(newGameLabel);
 
 		Menu newGameMenu = new Menu();
 		newGameMenu.setGraphic(newGameLabel);

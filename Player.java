@@ -52,7 +52,7 @@ public class Player {
 	}
 
 	public boolean placeBallOn(Board board, int lv, int x, int y, Group group) {
-		if (!canPlay() && !board.playableCase(lv, x, y))
+		if (canPlay() && !board.playableCase(lv, x, y))
 			return false;
 		Boule current = playableBall();
 		board.setBall(current, lv, x, y);
