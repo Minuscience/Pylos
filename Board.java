@@ -1,5 +1,3 @@
-import javafx.scene.paint.Color;
-
 public class Board {
 	private Level[] board;
 
@@ -43,9 +41,9 @@ public class Board {
 		if (lv < 0 || lv > 3)
 			return false;
 		if (isEmpty(lv, x, y)) {
-			if (lv == 3)
-				return true;
-			else if (!isEmpty(lv + 1, x, y) && !isEmpty(lv + 1, x + 1, y) && !isEmpty(lv + 1, x, y + 1)
+			if (lv ==3)
+				return isEmpty(lv, x, y);
+			else if (!isEmpty(lv +1, x, y) && !isEmpty(lv + 1, x + 1, y) && !isEmpty(lv + 1, x, y + 1)
 					&& !isEmpty(lv + 1, x + 1, y + 1))
 				return true;
 			else
