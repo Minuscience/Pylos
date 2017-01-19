@@ -35,10 +35,13 @@ import javafx.stage.WindowEvent;
 import moleculesampleapp.Xform;
 
 public class GameGUI extends Application {
-	private static Group game3dBox = new Group();
+	static Group game3dBox = new Group();
+	static Group subRoot3d = new Group();
+	static Group subRoot2d = new Group();
 	private BorderPane game2dBox = new BorderPane();
-	Label player1 = new Label("PLAYER 1");
-	Label player2 = new Label("PLAYER 2");
+	public static Label player1 = new Label("PLAYER 1");
+	public static Label player2 = new Label("PLAYER 2");
+	public static Scene scene;
 	final PerspectiveCamera camera = new PerspectiveCamera(true);
 	final Xform cameraXform1 = new Xform();
 	final Xform cameraXform2 = new Xform();
@@ -60,12 +63,13 @@ public class GameGUI extends Application {
 	public static Player[] gammers;
 	public static Label[] labelPlayers;
 	public static Scanner scan;
+	public static Thread game;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	public void start(Stage primaryStage) throws Exception {		
+	public void start(Stage primaryStage) throws Exception {
 		HBox menuBox = gameMenu(primaryStage);
 
 		camera.setNearClip(0.1);
@@ -78,24 +82,14 @@ public class GameGUI extends Application {
 		// cameraXform1.ry.setAngle(320.0);
 		cameraXform1.rx.setAngle(80);
 
-		board = new Board();
-		j1 = new Player(false);
-		j2 = new Player(true);
-		gammers = new Player[2];
-		gammers[0] = j1;
-		gammers[1] = j2;
-		labelPlayers = new Label[2];
-		labelPlayers[0] = player1;
-		labelPlayers[1] = player2;
-		scan = new Scanner(System.in);
 		
-		setGame3d();
-		
-		BorderPane root = new BorderPane();
-		Group subRoot3d = new Group();
-		Group subRoot2d = new Group();
 
-		Scene scene = new Scene(root, 900, 750, Color.WHITE);
+
+
+		BorderPane root = new BorderPane();
+		
+
+		scene = new Scene(root, 900, 750, Color.WHITE);
 		SubScene subScene3d = new SubScene(subRoot3d, 900, 500, true, SceneAntialiasing.BALANCED);
 		SubScene subScene2d = new SubScene(subRoot2d, 900, 200, true, SceneAntialiasing.BALANCED);
 
@@ -109,11 +103,11 @@ public class GameGUI extends Application {
 		root.setTop(subScene3d);
 		root.setCenter(subScene2d);
 		root.setBottom(menuBox);
-		draw3D();
-		Thread game = new Thread(new GameThread(gammers, scan, board, game3dBox, labelPlayers));
-		game.start();
+				setGame3d();
+
 
 		// Menu start
+
 		Image background = new Image("file:src/img/background.jpg");
 		
 		ImageView imgNg = new ImageView(new Image("file:src/img/newgame.png"));
@@ -121,6 +115,19 @@ public class GameGUI extends Application {
 			@Override
 			public void handle(MouseEvent event) {
 				primaryStage.setScene(scene);
+				board = new Board();
+				j1 = new Player(false);
+				j2 = new Player(true);
+				gammers = new Player[2];
+				gammers[0] = j1;
+				gammers[1] = j2;
+				labelPlayers = new Label[2];
+				labelPlayers[0] = player1;
+				labelPlayers[1] = player2;
+				scan = new Scanner(System.in);
+				game = new Thread(new GameThread(gammers, scan, board, game3dBox, labelPlayers));
+				game.start();
+				draw3D();
 			}
 		});
 		imgNg.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -129,7 +136,7 @@ public class GameGUI extends Application {
 				imgNg.setImage(new Image("file:src/img/newgameselect.png"));
 			}
 		});
-		imgNg.setOnMouseExited(new EventHandler<MouseEvent>(){
+		imgNg.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				imgNg.setImage(new Image("file:src/img/newgame.png"));
@@ -148,7 +155,7 @@ public class GameGUI extends Application {
 				imgQ.setImage(new Image("file:src/img/quitselect.png"));
 			}
 		});
-		imgQ.setOnMouseExited(new EventHandler<MouseEvent>(){
+		imgQ.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				imgQ.setImage(new Image("file:src/img/quit.png"));
@@ -158,14 +165,14 @@ public class GameGUI extends Application {
 		imgGame.getChildren().addAll(imgNg, imgQ);
 		imgGame.setLayoutX(200);
 		imgGame.setLayoutY(500);
-		
+
 		Pane rootMenuStart = new Pane();
 		rootMenuStart.setBackground(new Background(new BackgroundImage(background, null, null, null, null)));
 		rootMenuStart.getChildren().add(imgGame);
 
 		Scene sceneMenuStart = new Scene(rootMenuStart, 900, 750);
 		// Fin menu start
-		
+
 		handleMouse(subScene3d, game3dBox);
 		primaryStage.setTitle("Pylos");
 		primaryStage.setScene(sceneMenuStart);
@@ -220,8 +227,6 @@ public class GameGUI extends Application {
 		});
 	}
 
-	
-
 	private Ball3D createBall3D(double size, String color) {
 		Ball3D ball = new Ball3D(40);
 		ball.setBallColor(color);
@@ -243,7 +248,7 @@ public class GameGUI extends Application {
 		boxXform.setTranslateY(-40);
 
 		// Game balls
-		draw3D();
+
 
 		game3dBox.getChildren().add(boxXform);
 		game3dBox.getChildren().add(cameraXform1);
@@ -340,6 +345,7 @@ public class GameGUI extends Application {
 		newGameLabel.setPrefWidth(300);
 		newGameLabel.setWrapText(true);
 
+		NewGame newGame = new NewGame(game, gammers, board, game3dBox, labelPlayers);
 		newGame.setNewGame(newGameLabel);
 
 		Menu newGameMenu = new Menu();
@@ -387,7 +393,7 @@ public class GameGUI extends Application {
 				popupHelp.setTitle("Besoin d'aide ?");
 				popupHelp.getIcons().add(new Image("file:src/img/help.png"));
 				VBox dialogVbox = new VBox(20);
-				
+
 				dialogVbox.getChildren().add(Help.finalVboxHelp());
 				Scene dialogScene = new Scene(dialogVbox, 920, 150);
 				popupHelp.setScene(dialogScene);

@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 public class Board {
 	private Level[] board;
 
@@ -41,13 +43,12 @@ public class Board {
 		if (lv < 0 || lv > 3)
 			return false;
 		if (isEmpty(lv, x, y)) {
-			if (lv ==3)
+			if (lv == 3)
 				return isEmpty(lv, x, y);
-			else if (!isEmpty(lv +1, x, y) && !isEmpty(lv + 1, x + 1, y) && !isEmpty(lv + 1, x, y + 1)
-					&& !isEmpty(lv + 1, x + 1, y + 1))
-				return true;
 			else
-				return false;
+				return (!isEmpty(lv + 1, x, y) && !isEmpty(lv + 1, x + 1, y) && !isEmpty(lv + 1, x, y + 1)
+						&& !isEmpty(lv + 1, x + 1, y + 1));
+
 		}
 		return false;
 	}
@@ -111,6 +112,7 @@ public class Board {
 			return false;
 		} else if (player.isBlack() == getBall(lv, x, y).isBlack()) {
 			System.out.println("on retire");
+			Platform.runLater(new Remove3D(GameGUI.board.getBall(lv, x, y).getBoule3D(), GameGUI.game3dBox));
 			getBall(lv, x, y).setOnBoard(false);
 			return true;
 		}
