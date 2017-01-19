@@ -115,9 +115,9 @@ public class GameGUI extends Application {
 		game.start();
 
 		// Menu start
-		Image background = new Image("file:img/background.jpg");
+		Image background = new Image("file:src/img/background.jpg");
 		
-		ImageView imgNg = new ImageView(new Image("file:img/newgame.png"));
+		ImageView imgNg = new ImageView(new Image("file:src/img/newgame.png"));
 		imgNg.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
@@ -127,16 +127,16 @@ public class GameGUI extends Application {
 		imgNg.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				imgNg.setImage(new Image("file:img/newgameselect.png"));
+				imgNg.setImage(new Image("file:src/img/newgameselect.png"));
 			}
 		});
 		imgNg.setOnMouseExited(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				imgNg.setImage(new Image("file:img/newgame.png"));
+				imgNg.setImage(new Image("file:src/img/newgame.png"));
 			}
 		});
-		ImageView imgQ = new ImageView(new Image("file:img/quit.png"));
+		ImageView imgQ = new ImageView(new Image("file:src/img/quit.png"));
 		imgQ.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent me) {
@@ -146,13 +146,13 @@ public class GameGUI extends Application {
 		imgQ.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				imgQ.setImage(new Image("file:img/quitselect.png"));
+				imgQ.setImage(new Image("file:src/img/quitselect.png"));
 			}
 		});
 		imgQ.setOnMouseExited(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				imgQ.setImage(new Image("file:img/quit.png"));
+				imgQ.setImage(new Image("file:src/img/quit.png"));
 			}
 		});
 		VBox imgGame = new VBox();
@@ -352,7 +352,7 @@ public class GameGUI extends Application {
 				popupRules.initModality(Modality.APPLICATION_MODAL);
 				popupRules.initOwner(primaryStage);
 				popupRules.setTitle("Les règles du jeu");
-				popupRules.getIcons().add(new Image("file:img/rules.png"));
+				popupRules.getIcons().add(new Image("file:src/img/rules.png"));
 				VBox dialogVbox = new VBox(20);
 				dialogVbox.getChildren().addAll(Rules.getRules());
 				dialogVbox.setSpacing(2.0);
@@ -377,7 +377,7 @@ public class GameGUI extends Application {
 				popupHelp.initModality(Modality.APPLICATION_MODAL);
 				popupHelp.initOwner(primaryStage);
 				popupHelp.setTitle("Besoin d'aide ?");
-				popupHelp.getIcons().add(new Image("file:img/help.png"));
+				popupHelp.getIcons().add(new Image("file:src/img/help.png"));
 				VBox dialogVbox = new VBox(20);
 				
 				dialogVbox.getChildren().add(Help.finalVboxHelp());
@@ -413,7 +413,6 @@ public class GameGUI extends Application {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == yes) {
 					System.exit(0);
-
 				}
 			}
 		});
