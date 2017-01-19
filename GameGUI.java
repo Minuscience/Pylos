@@ -13,15 +13,20 @@ import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
@@ -35,8 +40,8 @@ import moleculesampleapp.Xform;
 public class GameGUI extends Application {
 	private static Group game3dBox = new Group();
 	private BorderPane game2dBox = new BorderPane();
-	Label player1;
-	Label player2;
+	Label player1 = new Label("PLAYER 1");
+	Label player2 = new Label("PLAYER 2");
 	final PerspectiveCamera camera = new PerspectiveCamera(true);
 	final Xform cameraXform1 = new Xform();
 	final Xform cameraXform2 = new Xform();
@@ -56,13 +61,14 @@ public class GameGUI extends Application {
 	public static Player j2;
 
 	public static Player[] gammers;
+	public static Label[] labelPlayers;
 	public static Scanner scan;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) throws Exception {		
 		HBox menuBox = gameMenu(primaryStage);
 
 		camera.setNearClip(0.1);
@@ -81,11 +87,13 @@ public class GameGUI extends Application {
 		gammers = new Player[2];
 		gammers[0] = j1;
 		gammers[1] = j2;
+		labelPlayers = new Label[2];
+		labelPlayers[0] = player1;
+		labelPlayers[1] = player2;
 		scan = new Scanner(System.in);
 		
-
 		setGame3d();
-
+		
 		BorderPane root = new BorderPane();
 		Group subRoot3d = new Group();
 		Group subRoot2d = new Group();
@@ -105,19 +113,72 @@ public class GameGUI extends Application {
 		root.setCenter(subScene2d);
 		root.setBottom(menuBox);
 		draw3D();
-		Thread game = new Thread(new GameThread(gammers, scan, board, game3dBox));
+		Thread game = new Thread(new GameThread(gammers, scan, board, game3dBox, labelPlayers));
 		game.start();
 
-		handleMouse(scene, game3dBox);
+		// Menu start
+		Image background = new Image("file:img/background.jpg");
+		
+		ImageView imgNg = new ImageView(new Image("file:img/newgame.png"));
+		imgNg.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				primaryStage.setScene(scene);
+			}
+		});
+		imgNg.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				imgNg.setImage(new Image("file:img/newgameselect.png"));
+			}
+		});
+		imgNg.setOnMouseExited(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				imgNg.setImage(new Image("file:img/newgame.png"));
+			}
+		});
+		ImageView imgQ = new ImageView(new Image("file:img/quit.png"));
+		imgQ.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent me) {
+				System.exit(0);
+			}
+		});
+		imgQ.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				imgQ.setImage(new Image("file:img/quitselect.png"));
+			}
+		});
+		imgQ.setOnMouseExited(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				imgQ.setImage(new Image("file:img/quit.png"));
+			}
+		});
+		VBox imgGame = new VBox();
+		imgGame.getChildren().addAll(imgNg, imgQ);
+		imgGame.setLayoutX(200);
+		imgGame.setLayoutY(500);
+		
+		Pane rootMenuStart = new Pane();
+		rootMenuStart.setBackground(new Background(new BackgroundImage(background, null, null, null, null)));
+		rootMenuStart.getChildren().add(imgGame);
+
+		Scene sceneMenuStart = new Scene(rootMenuStart, 900, 750);
+		// Fin menu start
+		
+		handleMouse(subScene3d, game3dBox);
 		primaryStage.setTitle("Pylos");
-		primaryStage.setScene(scene);
+		primaryStage.setScene(sceneMenuStart);
 		primaryStage.setResizable(false);
 		primaryStage.show();
 
 	}
 
-	private void handleMouse(Scene scene, final Node root) {
-		scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+	private void handleMouse(SubScene subScene3d, final Node root) {
+		subScene3d.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
 				mousePosX = me.getSceneX();
@@ -126,7 +187,7 @@ public class GameGUI extends Application {
 				mouseOldY = me.getSceneY();
 			}
 		});
-		scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
+		subScene3d.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
 				mouseOldX = mousePosX;
@@ -212,11 +273,9 @@ public class GameGUI extends Application {
 		BorderPane game2dPane = new BorderPane();
 
 		// BorderPane LEFT content
-		player1 = new Label("PLAYER 1");
 		player1.setPadding(new Insets(5, 5, 5, 5));
 		player1.setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 
-		player2 = new Label("PLAYER 2");
 		player2.setPadding(new Insets(5, 5, 5, 5));
 		player2.setStyle("-fx-border-width: 1; -fx-border-color: black");
 		VBox playersBox = new VBox();
@@ -319,10 +378,10 @@ public class GameGUI extends Application {
 				final Stage popupHelp = new Stage();
 				popupHelp.initModality(Modality.APPLICATION_MODAL);
 				popupHelp.initOwner(primaryStage);
-				popupHelp.setTitle("Besoin d'aide?");
+				popupHelp.setTitle("Besoin d'aide ?");
 				popupHelp.getIcons().add(new Image("file:img/help.png"));
 				VBox dialogVbox = new VBox(20);
-				dialogVbox.getChildren().add(new Text("Ceci va vous aider"));
+				dialogVbox.getChildren().add(new Text("Ceci va vous aider."));
 				Scene dialogScene = new Scene(dialogVbox, 300, 200);
 				popupHelp.setScene(dialogScene);
 				popupHelp.show();
@@ -344,8 +403,8 @@ public class GameGUI extends Application {
 				event.consume();
 
 				// les boutons
-				ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
-				ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
+				ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+				ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
 				// show close dialog
 				Alert alert = new Alert(null, "Are you sure?", yes, no);
