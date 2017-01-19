@@ -9,24 +9,24 @@ public class GameThread implements Runnable {
 	int lv;
 	int x;
 	int y;
-	Group scene3d;
+	Group game3dBox;
 	GameGUI panel;
 
-	public GameThread(Player[] gammers, Scanner scan, Board board, Group game3dBox, GameGUI panel) {
+	public GameThread(Player[] gammers, Scanner scan, Board board, Group game3dBox) {
 		this.gammers = gammers;
 		this.scan = scan;
 		this.board = board;
-		this.scene3d= game3dBox;
+		this.game3dBox= game3dBox;
 	}
 
 	@Override
 	public void run() {
-		gammers[0].placeBallOn(board, 3, 0, 1);
-		gammers[0].placeBallOn(board, 3, 1, 1);
-		gammers[0].placeBallOn(board, 3, 1, 0);
-		gammers[1].placeBallOn(board, 3, 3, 3);
-		gammers[1].placeBallOn(board, 3, 2, 2);
-		gammers[1].placeBallOn(board, 3, 2, 3);
+		gammers[0].placeBallOn(board, 3, 0, 1,game3dBox);
+		gammers[0].placeBallOn(board, 3, 1, 1,game3dBox);
+		gammers[0].placeBallOn(board, 3, 1, 0,game3dBox);
+		gammers[1].placeBallOn(board, 3, 3, 3,game3dBox);
+		gammers[1].placeBallOn(board, 3, 2, 2,game3dBox);
+		gammers[1].placeBallOn(board, 3, 2, 3,game3dBox);
 		System.out.println(board);
 		System.out.println(gammers[0]);
 		System.out.println(gammers[1]);
@@ -37,7 +37,7 @@ public class GameThread implements Runnable {
 				lv = scan.nextInt();
 				x = scan.nextInt();
 				y = scan.nextInt();
-				if (gammers[j].playableBall() != null && !gammers[j].placeBallOn(board, lv, x, y))
+				if (gammers[j].playableBall() != null && !gammers[j].placeBallOn(board, lv, x, y,game3dBox))
 					j--;
 				System.out.println(board);
 			}

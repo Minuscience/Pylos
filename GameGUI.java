@@ -54,6 +54,7 @@ public class GameGUI extends Application {
 	public static Board board;
 	public static Player j1;
 	public static Player j2;
+	
 	public static Player[] gammers;
 	public static Scanner scan;
 
@@ -105,11 +106,11 @@ public class GameGUI extends Application {
 		root.setTop(subScene3d);
 		root.setCenter(subScene2d);
 		root.setBottom(menuBox);
-		Thread game = new Thread(new GameThread(gammers, scan, board, game3dBox, this));
+		draw3D();
+		Thread game = new Thread(new GameThread(gammers, scan, board, game3dBox));
 		game.start();
-
+		
 		handleMouse(scene, game3dBox);
-		primaryStage.show();
 		primaryStage.setTitle("Pylos");
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
@@ -225,6 +226,7 @@ public class GameGUI extends Application {
 		player1 = new Label("PLAYER 1");
 		player1.setPadding(new Insets(5, 5, 5, 5));
 		player1.setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+		
 		player2 = new Label("PLAYER 2");
 		player2.setPadding(new Insets(5, 5, 5, 5));
 		player2.setStyle("-fx-border-width: 1; -fx-border-color: black");
@@ -348,6 +350,7 @@ public class GameGUI extends Application {
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == yes) {
 					Platform.exit();
+					
 				}
 			}
 		});

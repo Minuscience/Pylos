@@ -15,8 +15,8 @@ public class Player {
 		turn = color;
 		isBlack = color;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return myBall.toString();
 	}
 
@@ -32,7 +32,7 @@ public class Player {
 		this.turn = turn;
 	}
 
-	//un joueur peut jouer si c'est son tour et qu'il a des boules
+	// un joueur peut jouer si c'est son tour et qu'il a des boules
 	public boolean canPlay() {
 		if (!turn)
 			return false;
@@ -51,16 +51,21 @@ public class Player {
 		return null;
 	}
 
-	public boolean placeBallOn(Board board, int lv, int x, int y) {
+	public boolean placeBallOn(Board board, int lv, int x, int y, Group group) {
 		if (!canPlay() && !board.playableCase(lv, x, y))
 			return false;
 		Boule current = playableBall();
 		board.setBall(current, lv, x, y);
 		current.getPlace().setPosition(lv, x, y);
 		current.place3D(lv, x, y);
-		GameGUI.draw3D();
+		if (group != null)
+			current.placeOnGroup3D(group);
 		current.setOnBoard(true);
 		return true;
+	}
+
+	public boolean placeBallOn(Board board, int lv, int x, int y) {
+		return placeBallOn(board, lv, x, y, null);
 	}
 
 	public enum Action {
