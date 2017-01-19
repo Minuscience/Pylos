@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -277,47 +276,56 @@ public class GameGUI extends Application {
 		player2.setPadding(new Insets(5, 5, 5, 5));
 		player2.setStyle("-fx-border-width: 1; -fx-border-color: black");
 		VBox playersBox = new VBox();
-		playersBox.setAlignment(Pos.CENTER);
+		playersBox.setAlignment(Pos.BOTTOM_CENTER);
 		playersBox.setSpacing(10);
+		playersBox.setTranslateX(10);
 		playersBox.getChildren().addAll(player1, player2);
 
 		game2dPane.setLeft(playersBox);
 
 		// BorderPane CENTER content
 		Group circles = new Group();
+		circles.setTranslateX(30);
 		
 		for (int lv = 0; lv < 4; lv++) {
 			for (int x = 0; x <= lv; x++) {
 				for (int y = 0; y <= lv; y++) {
-					if (board.getBall(lv, x, y) == null) {
-						Boule test = new Boule(true);
-						Circle2D circle = test.getBoule2D();
-						circle = new Circle2D(20.0f);
+					Boule b = new Boule(board, lv, x, y);
+					if (board.getBall(lv, x, y) == null){
+						Circle2D circle = new Circle2D(20.0f);
 						circle.setStroke(Color.GRAY, 2);
 						circle.setColor(Color.WHITE);
 						circle.setPosX(lv*170+x*41);
 						circle.setPosY(y*41);
 						circles.getChildren().add(circle.getCircle());
-					}else if(board.getBall(lv, x, y).isBlack()){
-						System.out.println("test testttttttttttttttttttttt");
-						Circle2D circle = board.getBall(lv, x, y).getBoule2D();
-						circle.setStroke(Color.WHITE, 2);
-						circle.setColor(Color.BLACK);
-						circle.setPosX(lv*170+x*41);
-						circle.setPosY(y*41);
-						circles.getChildren().add(circle.getCircle());
-					}else{
-						Circle2D circle = board.getBall(lv, x, y).getBoule2D();
-						circle.setStroke(Color.BEIGE, 2);
-						circle.setColor(Color.WHITE);
-						circle.setPosX(lv*170+x*41);
-						circle.setPosY(y*41);
-						circles.getChildren().add(circle.getCircle());
+						b.setBoule2D(circle);
 					}
-						
-					
+//					if (board.getBall(lv, x, y) == null) {
+//						Boule test = new Boule(true);
+//						Circle2D circle = test.getBoule2D();
+//						circle = new Circle2D(20.0f);
+//						circle.setStroke(Color.GRAY, 2);
+//						circle.setColor(Color.WHITE);
+//						circle.setPosX(lv*170+x*41);
+//						circle.setPosY(y*41);
+//						circles.getChildren().add(circle.getCircle());
+//					}else if(board.getBall(lv, x, y).isBlack()){
+//						System.out.println("test testttttttttttttttttttttt");
+//						Circle2D circle = board.getBall(lv, x, y).getBoule2D();
+//						circle.setStroke(Color.WHITE, 2);
+//						circle.setColor(Color.BLACK);
+//						circle.setPosX(lv*170+x*41);
+//						circle.setPosY(y*41);
+//						circles.getChildren().add(circle.getCircle());
+//					}else{
+//						Circle2D circle = board.getBall(lv, x, y).getBoule2D();
+//						circle.setStroke(Color.BEIGE, 2);
+//						circle.setColor(Color.WHITE);
+//						circle.setPosX(lv*170+x*41);
+//						circle.setPosY(y*41);
+//						circles.getChildren().add(circle.getCircle());
+//					}	
 				}
-
 			}
 		}
 

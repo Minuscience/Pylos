@@ -14,8 +14,8 @@ public class newGame {
 			@Override
 			public void handle(MouseEvent e) {
 		        //les boutons
-		        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
-		        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
+		        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+		        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 		        
 		        // show close dialog
 		        Alert alert = new Alert(null, "WARNING! You will start a new game, the current game won't be saved. Continue?", yes, no);

@@ -7,7 +7,16 @@ import javafx.scene.paint.Color;
 public class Boule extends Ball {
 	private Circle2D boule2D;
 	private Ball3D boule3D;
+	private Board board;
+	private Position pos;
 
+	public Boule(Board board, int lv, int x, int y){
+		this.board = board;
+		boule2D = new Circle2D(20.0f);
+		boule3D = new Ball3D(40);
+		pos = new Position(lv, x, y);
+	}
+	
 	public Boule(boolean isBlack) {
 		super(isBlack);
 		
@@ -20,12 +29,9 @@ public class Boule extends Ball {
 			boule3D.setBallColor("white");
 		
 		boule2D.getCircle().setOnMousePressed(new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent arg0) {
-				
 				boule2D.setColor(Color.RED);
-				
 			}
 		});
 	}
@@ -36,6 +42,14 @@ public class Boule extends Ball {
 
 	public void setBoule2D(Circle2D boule2d) {
 		boule2D = boule2d;
+		
+		boule2D.getCircle().setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent me) {
+				System.out.println(pos.lv + " " + pos.x + " " + pos.y);
+				
+			}
+		});
 	}
 
 	public Ball3D getBoule3D() {
@@ -44,6 +58,10 @@ public class Boule extends Ball {
 
 	public void setBoule3D(Ball3D boule3d) {
 		boule3D = boule3d;
+	}
+	
+	public Position getPos(){
+		return pos;
 	}
 	
 	public void placeOnGroup3D(Group group){
