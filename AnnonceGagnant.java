@@ -8,8 +8,8 @@ import javafx.scene.control.ButtonType;
 		{
 	        ButtonType yes = new ButtonType("OK !", ButtonBar.ButtonData.OK_DONE);
 	        
-	        Alert alert = new Alert(null, "Le joueur " + gagnant + " a gagné!!", yes);
-	        alert.setTitle("Félicitation!!");
+	        Alert alert = new Alert(null, "Le joueur " + gagnant + " a gagné !", yes);
+	        alert.setTitle("Félicitation !");
 
 	        Optional<ButtonType> result = alert.showAndWait();
 	        if (result.get() == yes){

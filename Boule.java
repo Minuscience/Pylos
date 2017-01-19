@@ -72,6 +72,10 @@ public class Boule extends Ball {
 					if (result.get() == yes) {
 						if (gammers[0].isTurn()) {
 							if (gammers[0].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
+								if (board.onTop()){
+									AnnonceGagnant.gagnant("1");
+								}
+								
 								gammers[0].setTurn(false);
 								gammers[1].setTurn(true);
 								labelPlayers[1].setStyle(
@@ -80,6 +84,10 @@ public class Boule extends Ball {
 							}
 						} else {
 							if (gammers[1].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
+								if (board.onTop()){
+									AnnonceGagnant.gagnant("2");
+								}
+								
 								gammers[1].setTurn(false);
 								gammers[0].setTurn(true);
 								labelPlayers[0].setStyle(
