@@ -316,8 +316,7 @@ public class GameGUI extends Application {
 		newGameLabel.setPrefWidth(300);
 		newGameLabel.setWrapText(true);
 
-		NewGame newGame = new NewGame(game, gammers, board, game3dBox, labelPlayers);
-		newGame.setNewGame(newGameLabel);
+		
 
 		Menu newGameMenu = new Menu();
 		newGameMenu.setGraphic(newGameLabel);
@@ -405,5 +404,6 @@ public class GameGUI extends Application {
 		return menuBox;
 
 	}
+	
 
 }

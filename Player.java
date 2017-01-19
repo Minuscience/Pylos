@@ -6,6 +6,7 @@ public class Player {
 	private final boolean isBlack;
 	private ArrayList<Boule> myBall;
 	private boolean turn;
+	private boolean canRemove;
 
 	public Player(boolean color) {
 		myBall = new ArrayList<Boule>();
@@ -14,6 +15,7 @@ public class Player {
 		}
 		turn = color;
 		isBlack = color;
+		canRemove = false;
 	}
 
 	public String toString() {
@@ -66,6 +68,14 @@ public class Player {
 
 	public boolean placeBallOn(Board board, int lv, int x, int y) {
 		return placeBallOn(board, lv, x, y, null);
+	}
+
+	public boolean CanRemove() {
+		return canRemove;
+	}
+
+	public void setCanRemove(boolean canRemove) {
+		this.canRemove = canRemove;
 	}
 
 	public enum Action {

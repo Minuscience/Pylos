@@ -55,6 +55,7 @@ public class GameThread implements Runnable {
 					j--;
 					System.out.println(board);
 				} else if (board.squareFull(lv, x, y)) {
+					gammers[j].setCanRemove(true);
 					System.out.println("vous pouvez retirer 1 ou 2 balles");
 					System.out.println("vous voulez en retirer combien?");
 					int nbBallToRemove = scan.nextInt();

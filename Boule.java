@@ -70,7 +70,7 @@ public class Boule extends Ball {
 					Optional<ButtonType> result = alert.showAndWait();
 
 					if (result.get() == yes) {
-						if (gammers[0].isTurn()) {
+						if ( gammers[0].canPlay()) {
 							if (gammers[0].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("1");
@@ -81,8 +81,11 @@ public class Boule extends Ball {
 								labelPlayers[1].setStyle(
 										"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 								labelPlayers[0].setStyle("-fx-border-width: 1; -fx-border-color: black");
+								if((board.squareFull(lv, x, y))){
+									//pop up retirer
+								}
 							}
-						} else {
+						} else if(gammers[1].canPlay()){
 							if (gammers[1].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("2");
@@ -93,6 +96,9 @@ public class Boule extends Ball {
 								labelPlayers[0].setStyle(
 										"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 								labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
+								if((board.squareFull(lv, x, y))){
+									//pop up retirer
+								}
 							}
 						}
 					}
