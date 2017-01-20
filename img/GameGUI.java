@@ -1,3 +1,4 @@
+package img;
 import java.io.Writer;
 import java.util.Optional;
 import java.util.Scanner;
@@ -333,7 +334,7 @@ public class GameGUI extends Application {
 		newGameLabel.setPrefWidth(300);
 		newGameLabel.setWrapText(true);
 
-		
+		NewGame.setNewGame(newGameLabel);
 
 		Menu newGameMenu = new Menu();
 		newGameMenu.setGraphic(newGameLabel);

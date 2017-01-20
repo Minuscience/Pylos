@@ -1,3 +1,4 @@
+package img;
 import javafx.scene.Group;
 
 public class Place3D implements Runnable {

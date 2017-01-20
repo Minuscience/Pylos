@@ -1,3 +1,4 @@
+package img;
 import javafx.scene.Group;
 
 public class Remove3D implements Runnable {

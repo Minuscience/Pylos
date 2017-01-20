@@ -1,3 +1,4 @@
+package img;
 
 public class Position {
 	public int lv, x, y;

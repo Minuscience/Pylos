@@ -1,3 +1,4 @@
+package img;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;

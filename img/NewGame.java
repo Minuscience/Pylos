@@ -1,3 +1,4 @@
+package img;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -28,7 +29,7 @@ public class NewGame {
 		NewGame.labelPlayers=labelPlayers;
 	}
 	
-	public void setNewGame(Label newGameLabel)
+	public static void setNewGame(Label newGameLabel)
 	{
 		newGameLabel.setOnMousePressed(new EventHandler<MouseEvent>() {
 			

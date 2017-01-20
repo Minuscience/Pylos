@@ -1,3 +1,4 @@
+package img;
 import javafx.application.Platform;
 
 public class Board {

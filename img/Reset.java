@@ -1,3 +1,4 @@
+package img;
 import java.util.Scanner;
 
 import javafx.scene.Group;

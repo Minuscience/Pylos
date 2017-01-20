@@ -1,3 +1,4 @@
+package img;
 import java.util.ArrayList;
 
 import javafx.scene.Group;
@@ -15,7 +16,6 @@ public class Player {
 		}
 		turn = color;
 		isBlack = color;
-		canRemove = false;
 	}
 
 	public String toString() {
@@ -70,13 +70,7 @@ public class Player {
 		return placeBallOn(board, lv, x, y, null);
 	}
 
-	public boolean CanRemove() {
-		return canRemove;
-	}
-
-	public void setCanRemove(boolean canRemove) {
-		this.canRemove = canRemove;
-	}
+	
 
 	public enum Action {
 		/** place a new ball or remove one to mount */
