@@ -63,9 +63,10 @@ public class Boule extends Ball {
 				ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
 				// show close dialog
-
+				int retirer =0;
 				Alert alert = new Alert(null, "Make this move?", yes, no);
 				alert.setTitle("Confirmation Moves");
+				
 				if (GameGUI.board.playableCase(pos.lv, pos.x, pos.y)) {
 					Optional<ButtonType> result = alert.showAndWait();
 
@@ -75,10 +76,17 @@ public class Boule extends Ball {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("1");
 								}
-								if((board.squareFull(pos.lv, pos.x, pos.y))){
-									//pop up retirer
-									
-								}
+//								if ((board.squareFull(pos.lv, pos.x, pos.y))) {
+//									 pop up retirer
+//									Alert alert2 = new Alert(null, "Make this move?", yes);
+//									alert2.setTitle("You can Remove");
+//
+//									for (int i = 0; i < retirer; i++) {
+//										if (GameGUI.board.removeBall(gammers[0], pos.lv, pos.x, pos.y))
+//											;
+//									}
+//									
+//								}
 								gammers[0].setTurn(false);
 								gammers[1].setTurn(true);
 								labelPlayers[1].setStyle(
@@ -91,9 +99,7 @@ public class Boule extends Ball {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("2");
 								}
-								if((board.squareFull(lv, x, y))){
-									//pop up retirer
-								}
+								
 								gammers[1].setTurn(false);
 								gammers[0].setTurn(true);
 								labelPlayers[0].setStyle(
