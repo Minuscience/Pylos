@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -57,6 +58,8 @@ public class GameGUI extends Application {
 
 	public static final int LEVELS = 4;
 	public static final int BALLS = 30;
+	public static final int CAM_ANGLE = 80;
+	public static final double CAM_ROTATEZ = 180.0;
 	public static Board board = new Board();
 	public static Player j1;
 	public static Player j2;
@@ -77,11 +80,11 @@ public class GameGUI extends Application {
 		camera.setFarClip(1500.0);
 		camera.setTranslateZ(-cameraDistance);
 		cameraXform3.getChildren().add(camera);
-		cameraXform3.setRotateZ(180.0);
+		cameraXform3.setRotateZ(CAM_ROTATEZ);
 		cameraXform2.getChildren().add(cameraXform3);
 		cameraXform1.getChildren().add(cameraXform2);
 		// cameraXform1.ry.setAngle(320.0);
-		cameraXform1.rx.setAngle(80);
+		cameraXform1.rx.setAngle(CAM_ANGLE);
 		
 		BorderPane root = new BorderPane();
 
@@ -273,11 +276,25 @@ public class GameGUI extends Application {
 
 		player2.setPadding(new Insets(5, 5, 5, 5));
 		player2.setStyle("-fx-border-width: 1; -fx-border-color: black");
+		
+		Button resetCam = new Button("Reset camera");
+		resetCam.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				camera.setNearClip(0.1);
+				camera.setFarClip(1500.0);
+				camera.setTranslateZ(-cameraDistance);
+				cameraXform3.setRotateZ(CAM_ROTATEZ);
+				cameraXform1.rx.setAngle(CAM_ANGLE);
+				cameraXform1.ry.setAngle(0);
+			}
+		});
+		
 		VBox playersBox = new VBox();
 		playersBox.setAlignment(Pos.BOTTOM_CENTER);
 		playersBox.setSpacing(10);
 		playersBox.setTranslateX(10);
-		playersBox.getChildren().addAll(player1, player2);
+		playersBox.getChildren().addAll(player1, player2, resetCam);
 
 		game2dPane.setLeft(playersBox);
 
