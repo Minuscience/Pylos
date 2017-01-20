@@ -106,7 +106,7 @@ public class Board {
 			} else if (y == 0) {
 				return !isEmpty(lv - 1, x, y) || !isEmpty(lv - 1, x - 1, y);
 			} else if (y == lv) {
-				return !isEmpty(lv - 1, x, y - 1) || !isEmpty(lv - 1, x + 1, y - 1);
+				return !isEmpty(lv - 1, x, y - 1) || !isEmpty(lv - 1, x - 1, y - 1);
 			} else {
 				return (!isEmpty(lv - 1, x, y) || !isEmpty(lv - 1, x - 1, y) || !isEmpty(lv - 1, x, y - 1)
 						|| !isEmpty(lv - 1, x - 1, y - 1));
