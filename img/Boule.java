@@ -21,6 +21,7 @@ public class Boule extends Ball {
 	private Player[] gammers;
 	private Label[] labelPlayers;
 	public static int remove = 0;
+	public static boolean debug = true;
 
 	public Boule(Board board, Group game3dBox, Player[] gammers, Label[] labelPlayers, int lv, int x, int y) {
 		this.board = board;
@@ -57,6 +58,25 @@ public class Boule extends Ball {
 
 	public void setBoule2D(Circle2D boule2d) {
 		boule2D = boule2d;
+
+		boule2D.getCircle().setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				boule2d.setColor(Color.BLACK);
+
+			}
+
+		});
+		boule2D.getCircle().setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				boule2d.setColor(Color.WHITE);
+
+			}
+
+		});
 
 		boule2D.getCircle().setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -119,7 +139,7 @@ public class Boule extends Ball {
 
 					Alert alert = new Alert(null, "Retire this ball?", yes, no);
 					alert.setTitle("Confirmation Moves");
-
+					// boule2d.setColor(Color.BLACK);
 					Optional<ButtonType> result = alert.showAndWait();
 
 					if (result.get() == yes) {
@@ -134,7 +154,7 @@ public class Boule extends Ball {
 									labelPlayers[0].setStyle("-fx-border-width: 1; -fx-border-color: black");
 								}
 							}
-							
+
 						} else if (gammers[1].canPlay()) {
 							if (GameGUI.board.removeBall(gammers[1], pos.lv, pos.x, pos.y)) {
 								remove--;
@@ -146,12 +166,19 @@ public class Boule extends Ball {
 									labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
 								}
 							}
-							
+
 						}
 					}
 
 				}
+				if (debug) {
+					System.out.println(GameGUI.board);
+					System.out.println(GameGUI.gammers[0]);
+					System.out.println(GameGUI.gammers[1]);
+
+				}
 			}
+
 		});
 	}
 

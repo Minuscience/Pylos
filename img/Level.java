@@ -43,6 +43,21 @@ public class Level {
 	public boolean caseIsEmpty(int i,int j){
 		return grid[i][j] == null;
 	}
+
+	public String toStringDebug() {
+		StringBuffer map = new StringBuffer();
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid.length; j++) {
+				if (grid[i][j] == null)
+					map.append(".");
+				else
+					map.append(grid[i][j].isOnBoard());
+			}
+			map.append("\n");
+		}
+		return map.toString();
+		return null;
+	}
 	
 	
 }

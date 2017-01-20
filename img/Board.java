@@ -21,6 +21,15 @@ public class Board {
 		}
 		return plate.toString();
 	}
+	
+	public String toStringDebug() {
+		StringBuffer plate = new StringBuffer();
+		for (int i = 0; i < board.length; i++) {
+			plate.append(board[i].toStringDebug());
+			plate.append("\n");
+		}
+		return plate.toString();
+	}
 
 	// retourne une balle sur le plateau
 	public Boule getBall(int lv, int x, int y) {
