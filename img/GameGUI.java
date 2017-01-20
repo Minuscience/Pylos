@@ -1,5 +1,4 @@
 package img;
-import java.io.Writer;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -224,12 +223,6 @@ public class GameGUI extends Application {
 		});
 	}
 
-	private Ball3D createBall3D(double size, String color) {
-		Ball3D ball = new Ball3D(40);
-		ball.setBallColor(color);
-
-		return ball;
-	}
 
 	void setGame3d() {
 		final PhongMaterial greyMaterial = new PhongMaterial();
@@ -303,7 +296,6 @@ public class GameGUI extends Application {
 		Group circles = new Group();
 		circles.setTranslateX(30);
 		
-		int i = 0;
 		for (int lv = 0; lv < 4; lv++) {
 			for (int x = 0; x <= lv; x++) {
 				for (int y = 0; y <= lv; y++) {

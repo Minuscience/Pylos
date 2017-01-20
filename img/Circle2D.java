@@ -22,6 +22,12 @@ public class Circle2D {
 		circle.setFill(c);
 	}
 	
+	public int getPosX(){
+		return posX;
+	}
+	public int getPosY(){
+		return posY;
+	}
 	public void setPosX(int posX){
 		this.posX = posX;
 		circle.setCenterX(posX);
