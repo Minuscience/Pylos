@@ -271,12 +271,34 @@ public class GameGUI extends Application {
 	private BorderPane setGame2d() {
 		BorderPane game2dPane = new BorderPane();
 
-		// BorderPane LEFT content
+		// BorderPane LEFT content$
+		HBox player1Hbox = new HBox();
+		player1Hbox.setSpacing(3.0);
+		HBox player2Hbox = new HBox();
+		player2Hbox.setSpacing(3.0);
+		
+		Group circlePlayer1 = new Group();
+		Group circlePlayer2 = new Group();
+		
+		Circle2D legendRed = new Circle2D(15.0f);
+		legendRed.setStroke(Color.BLACK, 2);
+		legendRed.setColor(Color.RED);
+		circlePlayer1.getChildren().add(legendRed.getCircle());
+
+		
+		Circle2D legendWhite = new Circle2D(15.0f);
+		legendWhite.setStroke(Color.BLACK, 2);
+		legendWhite.setColor(Color.WHITE);
+		circlePlayer2.getChildren().add(legendWhite.getCircle());
+		
 		player1.setPadding(new Insets(5, 5, 5, 5));
 		player1.setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
-
+		
 		player2.setPadding(new Insets(5, 5, 5, 5));
 		player2.setStyle("-fx-border-width: 1; -fx-border-color: black");
+		
+		player1Hbox.getChildren().addAll(circlePlayer1, player1);
+		player2Hbox.getChildren().addAll(circlePlayer2, player2);
 		
 		Button resetCam = new Button("Reset camera");
 		resetCam.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -295,7 +317,7 @@ public class GameGUI extends Application {
 		playersBox.setAlignment(Pos.BOTTOM_CENTER);
 		playersBox.setSpacing(10);
 		playersBox.setTranslateX(10);
-		playersBox.getChildren().addAll(player1, player2, resetCam);
+		playersBox.getChildren().addAll(player1Hbox, player2Hbox, resetCam);
 
 		game2dPane.setLeft(playersBox);
 
