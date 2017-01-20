@@ -99,7 +99,6 @@ public class Board {
 			} else {
 				return (!isEmpty(lv - 1, x, y) || !isEmpty(lv - 1, x - 1, y) || !isEmpty(lv - 1, x, y - 1)
 						|| !isEmpty(lv - 1, x - 1, y - 1));
-
 			}
 		}
 	}

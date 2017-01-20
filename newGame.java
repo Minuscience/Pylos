@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -45,8 +46,14 @@ public class NewGame {
 
 		        Optional<ButtonType> result = alert.showAndWait();
 		        if (result.get() == yes){
-		        	System.out.println("New Game");
-		        	Platform.runLater(new Reset());
+		        	try {
+						Runtime.getRuntime().exec("java -jar Pylos.jar");
+						System.exit(0);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		        	
 		        	
 		        }
 	        }

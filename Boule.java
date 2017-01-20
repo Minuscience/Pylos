@@ -63,36 +63,68 @@ public class Boule extends Ball {
 				ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
 				// show close dialog
-
+				int retirer =0;
 				Alert alert = new Alert(null, "Make this move?", yes, no);
 				alert.setTitle("Confirmation Moves");
+				
 				if (GameGUI.board.playableCase(pos.lv, pos.x, pos.y)) {
 					Optional<ButtonType> result = alert.showAndWait();
 
 					if (result.get() == yes) {
-						if (gammers[0].isTurn()) {
+						if ( gammers[0].canPlay()) {
 							if (gammers[0].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("1");
 								}
-								
+
+//								if ((board.squareFull(pos.lv, pos.x, pos.y))) {
+//									 pop up retirer
+//									Alert alert2 = new Alert(null, "Make this move?", yes);
+//									alert2.setTitle("You can Remove");
+//
+//									for (int i = 0; i < retirer; i++) {
+//										if (GameGUI.board.removeBall(gammers[0], pos.lv, pos.x, pos.y))
+//											;
+//									}
+//									
+//								}
+
+								if((board.squareFull(pos.lv, pos.x, pos.y))){
+									retirer = RemoveIfPossible.remove();
+									if(retirer == 0)
+										System.out.println("Remove 0 boule");
+									else if (retirer == 1)
+										System.out.println("Remove 1 boule");
+									else
+										System.out.println("Remove 2 boules");
+								}
 								gammers[0].setTurn(false);
 								gammers[1].setTurn(true);
 								labelPlayers[1].setStyle(
 										"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 								labelPlayers[0].setStyle("-fx-border-width: 1; -fx-border-color: black");
+								
 							}
-						} else {
+						} else if(gammers[1].canPlay()){
 							if (gammers[1].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("2");
 								}
-								
+								if((board.squareFull(pos.lv, pos.x, pos.y))){
+									retirer = RemoveIfPossible.remove();	
+									if(retirer == 0)
+										System.out.println("Remove 0 boule");
+									else if (retirer == 1)
+										System.out.println("Remove 1 boule");
+									else
+										System.out.println("Remove 2 boules");
+								}
 								gammers[1].setTurn(false);
 								gammers[0].setTurn(true);
 								labelPlayers[0].setStyle(
 										"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 								labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
+								
 							}
 						}
 					}
