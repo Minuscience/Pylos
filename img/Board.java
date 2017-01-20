@@ -1,4 +1,5 @@
 package img;
+
 import javafx.application.Platform;
 
 public class Board {
@@ -85,18 +86,18 @@ public class Board {
 				else if (y == 0)
 					return !isEmpty(lv - 1, 0, 0);
 				else
-					return !isEmpty(lv - 1, x, y) || !isEmpty(lv, x, y + 1);
+					return !isEmpty(lv - 1, x, y) || !isEmpty(lv - 1, x, y - 1);
 			} else if (x == lv) {
 				if (y == lv)
 					return !isEmpty(lv - 1, x - 1, y - 1);
 				else if (y == 0)
 					return !isEmpty(lv - 1, x - 1, y);
 				else
-					return !isEmpty(lv - 1, x - 1, y) || !isEmpty(lv - 1, x - 1, y + 1);
+					return !isEmpty(lv - 1, x - 1, y) || !isEmpty(lv - 1, x - 1, y - 1);
 			} else if (y == 0) {
-				return !isEmpty(lv - 1, x, y) || !isEmpty(lv - 1, x + 1, y);
+				return !isEmpty(lv - 1, x, y) || !isEmpty(lv - 1, x - 1, y);
 			} else if (y == lv) {
-				return !isEmpty(lv - 1, x, y - 1) || !isEmpty(lv, x + 1, y - 1);
+				return !isEmpty(lv - 1, x, y - 1) || !isEmpty(lv - 1, x + 1, y - 1);
 			} else {
 				return (!isEmpty(lv - 1, x, y) || !isEmpty(lv - 1, x - 1, y) || !isEmpty(lv - 1, x, y - 1)
 						|| !isEmpty(lv - 1, x - 1, y - 1));

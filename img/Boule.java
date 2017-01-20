@@ -62,28 +62,70 @@ public class Boule extends Ball {
 			@Override
 			public void handle(MouseEvent me) {
 				// les boutons
+				if (remove == 0) {
+					ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+					ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-				ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-				ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+					// show close dialog
 
-				// show close dialog
-				
-				Alert alert = new Alert(null, "Make this move?", yes, no);
-				alert.setTitle("Confirmation Moves");
+					Alert alert = new Alert(null, "Make this move?", yes, no);
+					alert.setTitle("Confirmation Moves");
 
-				if (GameGUI.board.playableCase(pos.lv, pos.x, pos.y)) {
+					if (GameGUI.board.playableCase(pos.lv, pos.x, pos.y)) {
+						Optional<ButtonType> result = alert.showAndWait();
+
+						if (result.get() == yes) {
+							if (gammers[0].canPlay()) {
+								if (gammers[0].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
+									if (board.onTop()) {
+										AnnonceGagnant.gagnant("1");
+									}
+
+									if ((board.squareFull(pos.lv, pos.x, pos.y))) {
+										remove = RemoveIfPossible.remove();
+									}
+									if (remove == 0) {
+										gammers[0].setTurn(false);
+										gammers[1].setTurn(true);
+										labelPlayers[1].setStyle(
+												"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+										labelPlayers[0].setStyle("-fx-border-width: 1; -fx-border-color: black");
+									}
+								}
+							} else if (gammers[1].canPlay()) {
+								if (gammers[1].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
+									if (board.onTop()) {
+										AnnonceGagnant.gagnant("2");
+									}
+									if ((board.squareFull(pos.lv, pos.x, pos.y))) {
+										remove = RemoveIfPossible.remove();
+									}
+									if (remove == 0) {
+										gammers[1].setTurn(false);
+										gammers[0].setTurn(true);
+										labelPlayers[0].setStyle(
+												"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+										labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
+									}
+								}
+							}
+						}
+					}
+				} else {
+					ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+					ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+					// show close dialog
+
+					Alert alert = new Alert(null, "Retire this ball?", yes, no);
+					alert.setTitle("Confirmation Moves");
+
 					Optional<ButtonType> result = alert.showAndWait();
 
 					if (result.get() == yes) {
 						if (gammers[0].canPlay()) {
-							if (gammers[0].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
-								if (board.onTop()) {
-									AnnonceGagnant.gagnant("1");
-								}
-
-								if ((board.squareFull(pos.lv, pos.x, pos.y))) {
-									remove = RemoveIfPossible.remove();
-								}
+							if (GameGUI.board.removeBall(gammers[0], pos.lv, pos.x, pos.y)) {
+								remove--;
 								if (remove == 0) {
 									gammers[0].setTurn(false);
 									gammers[1].setTurn(true);
@@ -92,24 +134,22 @@ public class Boule extends Ball {
 									labelPlayers[0].setStyle("-fx-border-width: 1; -fx-border-color: black");
 								}
 							}
+							
 						} else if (gammers[1].canPlay()) {
-							if (gammers[1].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
-								if (board.onTop()) {
-									AnnonceGagnant.gagnant("2");
-								}
-								if ((board.squareFull(pos.lv, pos.x, pos.y))) {
-									remove = RemoveIfPossible.remove();
-								}
+							if (GameGUI.board.removeBall(gammers[1], pos.lv, pos.x, pos.y)) {
+								remove--;
 								if (remove == 0) {
-								gammers[1].setTurn(false);
-								gammers[0].setTurn(true);
-								labelPlayers[0].setStyle(
-										"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
-								labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
+									gammers[1].setTurn(false);
+									gammers[0].setTurn(true);
+									labelPlayers[0].setStyle(
+											"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+									labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
 								}
 							}
+							
 						}
 					}
+
 				}
 			}
 		});
