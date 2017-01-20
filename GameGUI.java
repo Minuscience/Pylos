@@ -400,7 +400,6 @@ public class GameGUI extends Application {
 				}
 			}
 		});
-
 		return menuBox;
 
 	}

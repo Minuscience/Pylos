@@ -11,7 +11,7 @@ import javafx.scene.control.ButtonType;
 	        ButtonType button2 = new ButtonType("2 boules", ButtonBar.ButtonData.OK_DONE);
 	        int resultat = 0;
 	        Alert alert = new Alert(null, "Combien de boule(s) voulez-vous retirer?", button0, button1, button2);
-	        alert.setTitle("Félicitation !");
+	        alert.setTitle("Un carré = Plus de boules dans sa réserve !");
 
 	        Optional<ButtonType> result = alert.showAndWait();
 	        if (result.get() == button0)
