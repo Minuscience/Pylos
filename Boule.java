@@ -76,6 +76,7 @@ public class Boule extends Ball {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("1");
 								}
+
 //								if ((board.squareFull(pos.lv, pos.x, pos.y))) {
 //									 pop up retirer
 //									Alert alert2 = new Alert(null, "Make this move?", yes);
@@ -87,6 +88,16 @@ public class Boule extends Ball {
 //									}
 //									
 //								}
+
+								if((board.squareFull(pos.lv, pos.x, pos.y))){
+									retirer = RemoveIfPossible.remove();
+									if(retirer == 0)
+										System.out.println("Remove 0 boule");
+									else if (retirer == 1)
+										System.out.println("Remove 1 boule");
+									else
+										System.out.println("Remove 2 boules");
+								}
 								gammers[0].setTurn(false);
 								gammers[1].setTurn(true);
 								labelPlayers[1].setStyle(
@@ -99,7 +110,15 @@ public class Boule extends Ball {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("2");
 								}
-								
+								if((board.squareFull(pos.lv, pos.x, pos.y))){
+									retirer = RemoveIfPossible.remove();	
+									if(retirer == 0)
+										System.out.println("Remove 0 boule");
+									else if (retirer == 1)
+										System.out.println("Remove 1 boule");
+									else
+										System.out.println("Remove 2 boules");
+								}
 								gammers[1].setTurn(false);
 								gammers[0].setTurn(true);
 								labelPlayers[0].setStyle(
