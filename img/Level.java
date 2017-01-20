@@ -56,7 +56,6 @@ public class Level {
 			map.append("\n");
 		}
 		return map.toString();
-		return null;
 	}
 	
 	
