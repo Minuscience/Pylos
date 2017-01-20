@@ -222,8 +222,12 @@ public class GameGUI extends Application {
 			}
 		});
 	}
+<<<<<<< HEAD
 
 
+=======
+	
+>>>>>>> 6eefcefc77c521443a7b48f6816e9ce02d1006fe
 	void setGame3d() {
 		final PhongMaterial greyMaterial = new PhongMaterial();
 		greyMaterial.setDiffuseColor(Color.DARKGREY);
@@ -238,8 +242,6 @@ public class GameGUI extends Application {
 		boxXform.setTranslateY(-40);
 
 		// Game balls
-
-
 		game3dBox.getChildren().add(boxXform);
 		game3dBox.getChildren().add(cameraXform1);
 
