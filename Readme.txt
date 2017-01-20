@@ -1,4 +1,7 @@
 Exécutez le fichier Jar : Pylos.jar et amusez-vous !
+Attention : le fichier jar a besoin des fichiers du dossier src (images) pour fonctionner.
+
+Les fichiers sources sont dans le dossier src/img.
 
 Les Mises à jour:
 	- Ajout d'une légende montrant la couleur des joueurs.
