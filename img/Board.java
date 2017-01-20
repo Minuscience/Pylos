@@ -69,7 +69,8 @@ public class Board {
 		if (isEmpty(lv, x, y)) {
 
 			board[lv].setBall(ball, x, y);
-			ball.setOnBoard(true);
+			if (ball != null)
+				ball.setOnBoard(true);
 			return true;
 		}
 		return false;

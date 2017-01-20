@@ -137,12 +137,12 @@ public class Boule extends Ball {
 
 					Alert alert = new Alert(null, "Retire this ball?", yes, no);
 					alert.setTitle("Confirmation Moves");
-					// boule2d.setColor(Color.BLACK);
 					Optional<ButtonType> result = alert.showAndWait();
 
 					if (result.get() == yes) {
 						if (gammers[0].canPlay()) {
 							if (GameGUI.board.removeBall(gammers[0], pos.lv, pos.x, pos.y)) {
+								System.out.println("remove");
 								remove--;
 								if (remove == 0) {
 									gammers[0].setTurn(false);
@@ -155,6 +155,7 @@ public class Boule extends Ball {
 
 						} else if (gammers[1].canPlay()) {
 							if (GameGUI.board.removeBall(gammers[1], pos.lv, pos.x, pos.y)) {
+								System.out.println("remove");
 								remove--;
 								if (remove == 0) {
 									gammers[1].setTurn(false);
