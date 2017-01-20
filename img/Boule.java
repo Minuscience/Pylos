@@ -64,7 +64,8 @@ public class Boule extends Ball {
 			public void handle(MouseEvent event) {
 				if (GameGUI.board.playableCase(pos.lv, pos.x, pos.y))
 					boule2D.setColor(Color.GREEN);
-				else boule2D.setColor(Color.GREY);
+				else
+					boule2D.setColor(Color.GREY);
 			}
 
 		});
@@ -104,8 +105,7 @@ public class Boule extends Ball {
 									if (remove == 0) {
 										gammers[0].setTurn(false);
 										gammers[1].setTurn(true);
-										labelPlayers[1].setStyle(
-												"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+										labelPlayers[1].setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 										labelPlayers[0].setStyle("-fx-border-width: 1; -fx-border-color: black");
 									}
 								}
@@ -120,12 +120,17 @@ public class Boule extends Ball {
 									if (remove == 0) {
 										gammers[1].setTurn(false);
 										gammers[0].setTurn(true);
-										labelPlayers[0].setStyle(
-												"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+										labelPlayers[0].setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 										labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
 									}
 								}
 							}
+							
+							if (!gammers[0].isTurn() && gammers[0].playableBall() == null)
+								AnnonceGagnant.gagnant("2");
+							else if (!gammers[1].isTurn() && gammers[1].playableBall() == null)
+								AnnonceGagnant.gagnant("1");
+
 						}
 						boule2D.setColor(Color.WHITE);
 					}
@@ -147,8 +152,7 @@ public class Boule extends Ball {
 								if (remove == 0) {
 									gammers[0].setTurn(false);
 									gammers[1].setTurn(true);
-									labelPlayers[1].setStyle(
-											"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+									labelPlayers[1].setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 									labelPlayers[0].setStyle("-fx-border-width: 1; -fx-border-color: black");
 								}
 							}
@@ -160,8 +164,7 @@ public class Boule extends Ball {
 								if (remove == 0) {
 									gammers[1].setTurn(false);
 									gammers[0].setTurn(true);
-									labelPlayers[0].setStyle(
-											"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
+									labelPlayers[0].setStyle("-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 									labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
 								}
 							}
