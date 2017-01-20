@@ -1,4 +1,5 @@
 package img;
+
 import java.util.ArrayList;
 
 import javafx.scene.Group;
@@ -7,7 +8,6 @@ public class Player {
 	private final boolean isBlack;
 	private ArrayList<Boule> myBall;
 	private boolean turn;
-	private boolean canRemove;
 
 	public Player(boolean color) {
 		myBall = new ArrayList<Boule>();
@@ -69,8 +69,6 @@ public class Player {
 	public boolean placeBallOn(Board board, int lv, int x, int y) {
 		return placeBallOn(board, lv, x, y, null);
 	}
-
-	
 
 	public enum Action {
 		/** place a new ball or remove one to mount */

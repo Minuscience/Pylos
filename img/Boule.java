@@ -174,6 +174,7 @@ public class Boule extends Ball {
 					boule2D.setColor(Color.WHITE);
 				}
 				if (debug) {
+					System.out.println("remove : "+remove);
 					System.out.println(GameGUI.board);
 					System.out.println(GameGUI.gammers[0]);
 					System.out.println(GameGUI.gammers[1]);

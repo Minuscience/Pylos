@@ -222,7 +222,7 @@ public class GameGUI extends Application {
 			}
 		});
 	}
-
+	
 	void setGame3d() {
 		final PhongMaterial greyMaterial = new PhongMaterial();
 		greyMaterial.setDiffuseColor(Color.DARKGREY);
@@ -237,8 +237,6 @@ public class GameGUI extends Application {
 		boxXform.setTranslateY(-40);
 
 		// Game balls
-
-
 		game3dBox.getChildren().add(boxXform);
 		game3dBox.getChildren().add(cameraXform1);
 
@@ -317,7 +315,6 @@ public class GameGUI extends Application {
 		Group circles = new Group();
 		circles.setTranslateX(30);
 		
-		int i = 0;
 		for (int lv = 0; lv < 4; lv++) {
 			for (int x = 0; x <= lv; x++) {
 				for (int y = 0; y <= lv; y++) {

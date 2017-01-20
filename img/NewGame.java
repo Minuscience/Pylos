@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
@@ -34,7 +33,6 @@ public class NewGame {
 		newGameLabel.setOnMousePressed(new EventHandler<MouseEvent>() {
 			
 
-			@SuppressWarnings("deprecation")
 			@Override
 			public void handle(MouseEvent e) {
 		        //les boutons

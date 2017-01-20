@@ -1,7 +1,6 @@
 package img;
 import java.util.Scanner;
 
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 
