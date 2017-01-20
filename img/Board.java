@@ -124,6 +124,7 @@ public class Board {
 			System.out.println("on retire");
 			Platform.runLater(new Remove3D(GameGUI.board.getBall(lv, x, y).getBoule3D(), GameGUI.game3dBox));
 			getBall(lv, x, y).setOnBoard(false);
+			setBall(null, lv, x, y);
 			return true;
 		}
 		return false;
