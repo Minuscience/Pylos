@@ -63,8 +63,8 @@ public class Boule extends Ball {
 			@Override
 			public void handle(MouseEvent event) {
 				if (GameGUI.board.playableCase(pos.lv, pos.x, pos.y))
-					boule2D.setColor(Color.BLACK);
-				else boule2D.setColor(Color.RED);
+					boule2D.setColor(Color.GREEN);
+				else boule2D.setColor(Color.GREY);
 			}
 
 		});
@@ -127,6 +127,7 @@ public class Boule extends Ball {
 								}
 							}
 						}
+						boule2D.setColor(Color.WHITE);
 					}
 				} else {
 					ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
@@ -166,7 +167,7 @@ public class Boule extends Ball {
 
 						}
 					}
-
+					boule2D.setColor(Color.WHITE);
 				}
 				if (debug) {
 					System.out.println(GameGUI.board);
