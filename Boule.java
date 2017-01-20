@@ -75,30 +75,31 @@ public class Boule extends Ball {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("1");
 								}
-								
+								if((board.squareFull(pos.lv, pos.x, pos.y))){
+									//pop up retirer
+									
+								}
 								gammers[0].setTurn(false);
 								gammers[1].setTurn(true);
 								labelPlayers[1].setStyle(
 										"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 								labelPlayers[0].setStyle("-fx-border-width: 1; -fx-border-color: black");
-								if((board.squareFull(lv, x, y))){
-									//pop up retirer
-								}
+								
 							}
 						} else if(gammers[1].canPlay()){
 							if (gammers[1].placeBallOn(board, pos.lv, pos.x, pos.y, game3dBox)) {
 								if (board.onTop()){
 									AnnonceGagnant.gagnant("2");
 								}
-								
+								if((board.squareFull(lv, x, y))){
+									//pop up retirer
+								}
 								gammers[1].setTurn(false);
 								gammers[0].setTurn(true);
 								labelPlayers[0].setStyle(
 										"-fx-background-color: grey; -fx-border-width: 1; -fx-border-color: black");
 								labelPlayers[1].setStyle("-fx-border-width: 1; -fx-border-color: black");
-								if((board.squareFull(lv, x, y))){
-									//pop up retirer
-								}
+								
 							}
 						}
 					}
